@@ -1,4 +1,4 @@
-#CloudFormation: ELK + DVWA
+# CloudFormation: ELK + DVWA
 <!-- markdownlint-configure-file { "MD004": { "style": "consistent" } } -->
 <!-- markdownlint-disable MD033 -->
 <p align="center">
