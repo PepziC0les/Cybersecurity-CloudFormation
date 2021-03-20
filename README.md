@@ -8,15 +8,18 @@
 <!-- markdownlint-enable MD033 -->
 
 # Purpose of the CloudFormation
-The CloudFormation built here demonstrates creating a basic network on AWS that utilizes DVWA and ELK servers for testing and practicing purposes. 
+The CloudFormation built here demonstrates creating a basic network on AWS that utilizes DVWA and ELK servers for testing, practicing, and learning purposes. 
 <p align="center">
-    <img src="./NetworkDiagram3.png">
+    <img src="./NetworkDiagram2.png">
     <br>
 </p>
 
 Shown here is a diagram depicting how the network is configured where we have our instances that we can connect to over the Internet in the "Public1" subnet, and our instances that we don't want accessed in our "Private1" subnet (Our ELK server and DVWA server). 
 
-Our subnets are also shown to be encapsulated in the diagram by the Availbility Zone used to host our virtual network. All connections are faciliated via the Internet Gateway, which is connected to VPC1
+We also
+
+Our subnets are also shown to be encapsulated in the diagram by the Availbility Zone used to host our virtual network. All connections are faciliated via the Internet Gateway, which is found on VPC1 and is connected to our "Public" subnets.
+
 
 
 # Creating our Cloud Stack
