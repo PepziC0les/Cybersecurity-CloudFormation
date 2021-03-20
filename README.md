@@ -16,6 +16,8 @@ The CloudFormation built here demonstrates creating a basic network on AWS that 
 
 Shown here is a diagram depicting how the network is configured where we have our instances that we can connect to over the Internet in the "Public1" subnet, and our instances that we don't want accessed in our "Private1" subnet (Our ELK server and DVWA server). 
 
+Our subnets are also shown to be encapsulated in the diagram by the Availbility Zone used to host our virtual network. All connections are faciliated via the Internet Gateway, which is connected to VPC1
+
 
 # Creating our Cloud Stack
 Login into your AWS console and search for "CloudFormation"
