@@ -81,8 +81,25 @@ Search for EC2 and select "Instances", and then create the following instances b
   - Should only have RDP as a rule
 - Select Review and Launch
 
+# Creating the Load Balancer
+On the EC2 page, look for load balancers and once found, select create load balancer.
+1. Select "Create" for the "Application Load Balancer"
+2. Give our load balancer a meaningful name and set to interal, 
+3. Select VPC1 so that we have access to our availability zones (should be 2 that appears) and select them.
+- Make sure that the availability zones are set to Private1 and Private2 (the location of our DVWA servers)
+4. Select next until we reach configure security groups
+- Here we want to create a new security group for our load balancer where we use HTTP and SSH (similar to secuirty configurations for our DVWA instances)
+5. Select next and now we need to create a new target group if none have been made yet
+- Target group should be new target group
+- Set name to be something meaningful
+6. Select next and now look for our DVWA servers under "Name".
+- Select tthe checkboxes to the left for our DVWAs and select "add to registered"
+- Note: If you already have a target group set for our DVWAs, skip step 6.
+7. Select next until you see "Create" and then select create.
+
 # Setting up our Instances for Deployment
-We want to SSH a
+We want to connect to our instances now. Go back to the instances page and select Connect for our Jumpbox.
+
 
 # Running our Servers
 
