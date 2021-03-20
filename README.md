@@ -10,7 +10,7 @@
 # Purpose of the CloudFormation
 The CloudFormation built here demonstrates creating a basic network on AWS that utilizes DVWA and ELK servers for testing and practicing purposes. 
 <p align="center">
-    <img src="./NetworkDiagram.png">
+    <img src="./NetworkDiagram3.png">
     <br>
 </p>
 
