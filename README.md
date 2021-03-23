@@ -109,9 +109,14 @@ We want to connect to our instances now. Go back to the instances page and selec
 - Open a Gitbash/Command Prompt terminal and change directories into the directory where your key(s) are/is stored.
 - Paste the ssh command and hit enter. The command should fit in the outline of the following:
 ```bash
-ssh -i <key> <destination>
+ssh -i <key> <user>@<destination>
 ```
-- ssh into each of your private Ubuntu instances using their private IPv4 addresses and update/upgrade them using the following commands:
+- We want to transfer all our important configuration + key files (key files meaning keys) before moving on. To do that, it's recommended to open at least 1 more terminal (Gitbash or Command Prompt). The following command will allow you to transfer 1 or more files:
+```bash
+scp -i <key> <file name(s)> <user>@<destination>:/path/to/home/directory
+Ex: scp -i Virginia.pem Virginia.pem ansible_config.yml thisuser@ec2.amazon.someinstance:/home/ec2-user
+```
+- ssh into each of your private Ubuntu instances using your keys and their private IPv4 addresses and update/upgrade them using the following commands:
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
@@ -122,14 +127,48 @@ sudo apt-get upgrade
 ```bash
 sudo yum install docker -y
 ```
-- Once the docker has been installed, we need to start the service. Before that, we should make a "daemon.json" so that our Ansible process defaults its address to our networks subnet. To do this, use the following commands:
+- Once the docker has been installed, we need to start the service. Before that, we should make a "daemon.json" so that our Ansible process defaults its address to our networks subnet. To do this, use the following command:
 ```bash
 sudo nano /etc/docker/daemon.json
 ```
-- follow it with the next command which pulls the ansible image (in other words, downloads it into our Jumpbox):
+- Copy the content of daemon.json in this git repository and paste it into your daemon.json. Once done, save and exit.
+- Now we must run our docker service which is done so by the following:
 ```bash
-
+sudo service docker start
 ```
+- To check if the service is running, you can do "sudo service docker status"
+- Follow it with the next command which pulls the ansible image (in other words, downloads it into our Jumpbox):
+```bash
+sudo docker image pull cyberxsecurity/ansible
+```
+- Now we want to run the ansible image, which can be done by doing running the following command:
+```bash
+sudo docker run -ti cyberxsecurity/ansible bash
+```
+- If you had closed your other terminals, be sure to open at least 1 more and ssh into your Jumpbox once more (NOTE: do not close the terminal where you can see the running ansible process. If done, wait until we get to the part where we finish discussing getting the process ID).
+- Inside the Jumpbox, we want to look for our process ID of the running Ansible process. To do that use the following command:
+```bash
+sudo docker ps
+```
+- Copy the value underneath process ID by highlighting it and keep that saved. If you had mistakingly exited or stopped the Ansible process, you can either reuse the "sudo docker run -ti cyberxsecurity/ansible bash" again if you did not see a process ID, or run "sudo docker attach <process ID>" to reenter the process.
+- We want to use the process ID to transfer our files (keys + configuration files) to our Ansible process. We can only trasnfer files 1 at a time using the following command:
+```bash
+sudo docker cp <file> <process ID>:/root
+Ex: sudo docker cp Key1.pem ad314a9d:/root
+```
+- Repeat the command above with each file in your Jumpbox.
+- Go back to your Ansible process now. We have to modify our /etc/ansible/hosts and /etc/ansible/ansible.cfg files so that they can communicate with our Ubuntu instances. To do so nano both of those files (no need to add sudo at the beginning).
+    - Inside the hosts file, look for '[webservers]' and remove the '#' symbols before it. Now add the private IPv4 addresses of your DVWA instances below it
+    - Still inside the hosts file, add '[elkservers]' below the IPv4 addresses you had just added, and now add the IPv4 address of your ELK machine beneath '[elkservers]'
+    - Save your changes and exit, and now nano /etc/ansible/ansible.cfg.
+    - Inside ansible.cfg, look for "remote_user = root" and change the variable to equal "ubuntu".
+    - Save and exit out of ansible.cfg.
+- Back inside our Ansible process, we must ssh into our private instances and then exit out of them (this is so that our current Ansible can establish connections later on again).
+- Once sshing into each of the private instances is done, run the following command to begin setting up our DVWA machines:
+```bash
+ansible-playbook ansible_config.yml --key-file=<key>
+```
+- Now we do the same
 
 # Running our Servers
 
