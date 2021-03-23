@@ -44,6 +44,7 @@ Search for EC2 and select "Instances", and then create the following instances b
 - Select next until you have reached "Configure Security Group"
   - Modify "Security Group Name" and "Description" and give it something meaningful (e.g. a meaningful name and description)
   - Should only have SSH as a rule
+- When prompted for key, create one if you do not have one. Creating keys allows you to download it onto Desktop for reuse on other AWS instances. Otherwise, choose existing.
 - Select Review and Launch
 
 2. Ubuntu Server 20.04 LTS (HVM), SSD Volume Type
@@ -59,6 +60,7 @@ Search for EC2 and select "Instances", and then create the following instances b
     - Add the following rules: "HTTP"
       - HTTP Port should default to 80. Change "Source" to be "Anywhere" instead of "Custom"
         - Note: This is bad practice to set source to anywhere. Only done here for testing purposes  
+  - When prompted for key, create one if you do not have one. Creating keys allows you to download it onto Desktop for reuse on other AWS instances. Otherwise, choose existing.
   - Select Review and Launch
 - For last 1 (Our ELK server):
   - Click next and select t3.medium
@@ -71,6 +73,7 @@ Search for EC2 and select "Instances", and then create the following instances b
     - Add the following rules: "HTTP", "TCP Custom" (need 5 TCP customs)
       - HTTP Port should default to 80. Change "Source" to be "Anywhere" instead of "Custom"
       - Custom TCP Ports should be 5044, 9600, 5601, 9300, and 9200. Change "Source" to be "Anywhere" instead of "Custom"
+  - When prompted for key, create one if you do not have one. Creating keys allows you to download it onto Desktop for reuse on other AWS instances. Otherwise, choose existing.
   - Select Review and Launch
 
 3. Microsoft Windows Server 2019 Base
@@ -82,6 +85,7 @@ Search for EC2 and select "Instances", and then create the following instances b
 - Select next until you have reached "Configure Security Group"
   - Modify "Security Group Name" and "Description" and give it something meaningful (e.g. a meaningful name and description)
   - Should only have RDP as a rule
+- When prompted for key, create one if you do not have one. Creating keys allows you to download it onto Desktop for reuse on other AWS instances. Otherwise, choose existing.
 - Select Review and Launch
 
 # Creating the Load Balancer
@@ -101,8 +105,15 @@ On the EC2 page, look for load balancers and once found, select create load bala
 7. Select next until you see "Create" and then select create.
 
 # Setting up our Instances for Deployment
-We want to connect to our instances now. Go back to the instances page and select Connect for our Jumpbox.
-
+We want to connect to our instances now. Go back to the instances page and select "Connect" for our Jumpbox and copy the ssh command.
+- Open a Gitbash/Command Prompt terminal and change directories into the directory where your key(s) are/is stored.
+- Paste the ssh command and hit enter. The command should look similar to the following:
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+```
+  - Select yes on all of them.
+- ssh into each of your private Ubuntu instances and update/upgrade them using the following commands:
 
 # Running our Servers
 
