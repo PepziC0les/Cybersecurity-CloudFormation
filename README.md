@@ -107,13 +107,29 @@ On the EC2 page, look for load balancers and once found, select create load bala
 # Setting up our Instances for Deployment
 We want to connect to our instances now. Go back to the instances page and select "Connect" for our Jumpbox and copy the ssh command.
 - Open a Gitbash/Command Prompt terminal and change directories into the directory where your key(s) are/is stored.
-- Paste the ssh command and hit enter. The command should look similar to the following:
+- Paste the ssh command and hit enter. The command should fit in the outline of the following:
+```bash
+ssh -i <key> <destination>
+```
+- ssh into each of your private Ubuntu instances using their private IPv4 addresses and update/upgrade them using the following commands:
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
 ```
-  - Select yes on all of them.
-- ssh into each of your private Ubuntu instances and update/upgrade them using the following commands:
+- To get out of a machine, type exit into the terminal.
+- Once all Ubuntu instances have been updated, we want to be back inside our Jumpbox.
+- Inside the Jumpbox, type the following command to install our "docker", which will be used to host and run our "Ansible" image:
+```bash
+sudo yum install docker -y
+```
+- Once the docker has been installed, we need to start the service. Before that, we should make a "daemon.json" so that our Ansible process defaults its address to our networks subnet. To do this, use the following commands:
+```bash
+sudo nano /etc/docker/daemon.json
+```
+- follow it with the next command which pulls the ansible image (in other words, downloads it into our Jumpbox):
+```bash
+
+```
 
 # Running our Servers
 
