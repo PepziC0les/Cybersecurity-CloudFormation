@@ -168,9 +168,13 @@ Ex: sudo docker cp Key1.pem ad314a9d:/root
 ```bash
 ansible-playbook ansible_config.yml --key-file=<key>
 ```
-- Now we do the same
+- We do the same to setup our ELK instance, where we switch out the ansible_config.yml with "install_elk.yml".
 
 # Running our Servers
+- 
 
 # Testing our Servers
 
+# Setting up Metricbeat and Filebeat
+
+# Possible Mishaps
