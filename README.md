@@ -24,11 +24,33 @@ Our subnets are also shown to be encapsulated in the diagram by the Availbility 
 # Understanding the Repository
 This repository is for helping and practicing setting up a basic cloud network on AWS to host ELK and DVWA servers. Other things to setup will be MetricBeat and FileBeat to be used on our ELK server. The primary files to be used are daemon.json and the files located in the "./Configs+Playbooks" folder. You can follow the diagram above to get a visual understanding of how the network will look like in the end. 
 
+The files in the Configs+Playbooks folder are: 
+- Basic_Network_Cloud_Formation.yaml
+- anisble-playbook.yml
+- install-elk.yml
+- filebeat-playbook.yml
+- filebeat.yml
+- metricbeat-playbook.yml
+- metricbeat.yml
+
+**"Basic_Network_Cloud_Formation.yaml"** is used to automatically deploy our network into AWS. It's recommended to play around with network setup yourself, but it's not explained here. If you're familiar with reading .yaml files, then it's strongly recommended to read through it and understand how each device interconnects with one another. If not, then you can refer to the network diagram on how it actually looks while ignorning the machine instances.
+
+NOTE: If you're not familiar with AWS, then it's strongly recommended to setup an account on there now and explore the site yourself for now. Jumping into this without prior knowledge may lead to more confusion rather than helping oneself. This is especially the case when rebooting our network. More on that at the bottom of this README.
+
+**"ansible-playbook.yml"** is what we use in our Ansible process to automatically setup our targeted Ubuntu machines to become DVWA servers. Everything in ansible-playbook.yml should be fine to leave as it is (in other word's no modifications should be needed. Change otherwise if it does not suit your needs). 
+
+NOTE: If you're not familiar with DVWA, then look here for a simplified explanation. Otherwise skip to the next part. DVWA is also as the "Damn Vulnerable Web Application", and it is a web penetration practice site for penetration testers (similar to bWAPP and HackThisSite.org). By it's name, it should be obvious that it is very vulnerable, thus its a great way to learn and practice with to gain a better understanding of web vulnerabilities. It's useful to have this setup on our network so that we can monitor and analyze what's going on. Here we are learning how to set it up on our own machines (the Ubuntu cloud instance, not your personal machine).
+
+**"install-elk.yml"** does the same as ansible-playbook.yml, but it's purpose is to turn one of our targeted Ubuntu machines into an ELK server. Everything in install-elk.yml should be fine to leave as is.
+
+NOTE: If you're not familiar with ELK, then look here for a simplified explanation. Otherwise skip to the next part. ELK is an acroynm that represents 3 widely used technologies: "Elasticsearch", "Logstash", and "Kibana". All 3 work in conjunction with one another to make analyzing and logging network activity more efficient in terms of understanding what is happening in our networks. We typically call it the ELK stack, and you can think of it as essentially 3 things stacked on top of one another with **E**lasticsearch on top, **L**ogstash in the middle, and **K**ibana at the bottom
+
+
 To start setting up your own basic network with instances, start off on the section, **"Creating our Cloud Stack"**. Otherwise if you're already ahead, look for the specific section that you feel best fits where you're at.
 
 # Creating our Cloud Stack
 Login into your AWS console and search for "CloudFormation"
-Select "create stack" and do the following:
+Select **"create stack"** and do the following:
 1. Select "Upload a template" Upload "Basic_Network_Cloud_Formation.yaml" (not .yml)
 2. Select next and name your stack
 3. Select next until you can launch your instance
@@ -39,7 +61,7 @@ Before setting up our instances, we want to modify our VPC configurations
 
 # Setting up our Amazon Instances
 Search for EC2 and select "Instances", and then create the following instances by selecting "Launch Instances":
-1. Amazon Linux 2 AMI (HVM), SSD Volume Type
+**1. Amazon Linux 2 AMI (HVM), SSD Volume Type**
 - Only need 1 Amazon Linux.
 - Click next and select t2.micro
 - Click Next and modify network and subnet:
@@ -51,7 +73,7 @@ Search for EC2 and select "Instances", and then create the following instances b
 - When prompted for key, create one if you do not have one. Creating keys allows you to download it onto Desktop for reuse on other AWS instances. Otherwise, choose existing.
 - Select Review and Launch
 
-2. Ubuntu Server 20.04 LTS (HVM), SSD Volume Type
+**2. Ubuntu Server 20.04 LTS (HVM), SSD Volume Type**
 - Need 3 Amazon Linux.
 - For first 2 (Our DVWA servers):
   - Click next and select t2.micro
@@ -80,7 +102,7 @@ Search for EC2 and select "Instances", and then create the following instances b
   - When prompted for key, create one if you do not have one. Creating keys allows you to download it onto Desktop for reuse on other AWS instances. Otherwise, choose existing.
   - Select Review and Launch
 
-3. Microsoft Windows Server 2019 Base
+**3. Microsoft Windows Server 2019 Base**
 - Only need 1 Windows instance.
 - Click next and select t2.micro
 - Click Next and modify network and subnet:
@@ -140,7 +162,7 @@ sudo nano /etc/docker/daemon.json
 ```bash
 sudo service docker start
 ```
-- To check if the service is running, you can do "sudo service docker status"
+- To check if the service is running, you can do **"sudo service docker status"** (optional)
 - Follow it with the next command which pulls the ansible image (in other words, downloads it into our Jumpbox):
 ```bash
 sudo docker image pull cyberxsecurity/ansible
@@ -154,7 +176,7 @@ sudo docker run -ti cyberxsecurity/ansible bash
 ```bash
 sudo docker ps
 ```
-- Copy the value underneath process ID by highlighting it and keep that saved. If you had mistakingly exited or stopped the Ansible process, you can either reuse the "sudo docker run -ti cyberxsecurity/ansible bash" again if you did not see a process ID, or run "sudo docker attach <process ID>" to reenter the process.
+- Copy the value underneath process ID by highlighting it and keep that saved. If you had mistakingly exited or stopped the Ansible process, you can either reuse the **"sudo docker run -ti cyberxsecurity/ansible bash"** again if you did not see a process ID, or run **"sudo docker attach <process ID>"** to reenter the process.
 - We want to use the process ID to transfer our files (keys + configuration files) to our Ansible process. We can only trasnfer files 1 at a time using the following command:
 ```bash
 sudo docker cp <file> <process ID>:/root
@@ -175,13 +197,13 @@ ansible-playbook ansible_config.yml --key-file=<key>
 - We do the same to setup our ELK instance, where we switch out the ansible_config.yml with "install_elk.yml".
 
 # Running our Servers
-- Before running our servers, we to create a daemon.json for each of our servers. Do the same as we did when we created our first daemon.json by doing "sudo nano /etc/docker/daemon.json" in each of them, then copy the content of daemon.json in the git repository into daemon.jsons of the instances.
-    - NOTE: If any of docker processes are running on any of our private instances, stop them since we will be restarting docker. You can check for a running process by doing "sudo docker ps" and if you do find one that is running, kill it by doing "sudo docker kill <process ID>"
+- Before running our servers, we to create a daemon.json for each of our servers. Do the same as we did when we created our first daemon.json by doing **"sudo nano /etc/docker/daemon.json"** in each of them, then copy the content of daemon.json in the git repository into daemon.jsons of the instances.
+    - NOTE: If any of docker processes are running on any of our private instances, stop them since we will be restarting docker. You can check for a running process by doing **"sudo docker ps"** and if you do find one that is running, kill it by doing **"sudo docker kill <process ID>"**
 - Restart the docker service once finished setting up our daemon.json file on each of the instances by doing the following:
 ```bash
 sudo service docker restart
 ```
-- You can confirm it is running by doing "sudo service docker status"
+- You can confirm it is running by doing **"sudo service docker status"** (optional)
 - Now we want to run our DVWA and ELK machines.
 - On the DVWA machines, run the following command:
 ```bash
