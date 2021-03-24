@@ -10,17 +10,21 @@
 -----
 
 # Purpose of the CloudFormation
-The CloudFormation built here demonstrates creating a basic network on AWS that utilizes DVWA and ELK servers for testing, practicing, and learning purposes. 
+The CloudFormation built here demonstrates creating a basic network and automatic deployment on AWS that utilizes an ELK server and load-balanced DVWAs for testing, practicing, and learning purposes. 
 <p align="center">
     <img src="./NetworkDiagram2.png">
     <br>
 </p>
 
+### Understanding the Topology
+
 Shown above is a diagram depicting how the network is configured where we have our instances that we can connect to over the Internet in the "Public1" subnet, and our instances that we don't want accessed in our "Private1" subnet (Our ELK server and DVWA server). 
 
 Our subnets are also shown to be encapsulated in the diagram by the Availbility Zone used to host our virtual network. All connections are faciliated via the Internet Gateway, which is found on VPC1 and is connected to our "Public" subnets.
 
-    
+### Access Policies
+
+
 | Operating System 	|       Name      	|    Subnet    	| Private/Public 	| Security Group 	|   Function  	|
 |:----------------:	|:---------------:	|:------------:	|:--------------:	|:--------------:	|:-----------:	|
 |      Ubuntu      	|    ELK Server   	| 10.10.2.x/24 	|     Private    	|  ELKServer-SG  	|    Server   	|
@@ -29,6 +33,11 @@ Our subnets are also shown to be encapsulated in the diagram by the Availbility 
 |      Windows     	| Windows Machine 	| 10.10.0.x/24 	|     Public     	|   Windows-SG   	| Application 	|
 |   Amazon Linux   	| Ansible/Jumpbox 	| 10.10.0.x/24 	|     Public     	|   Jumpbox-SG   	|   Gateway   	|
 
+
+-----
+
+# What's The Point?
+As industries move forward and into the cloud, the demand for cloud practicioners and their understanding of it has increased dramatically. Being able to deploy an enterprises network and its systems quickly is crucial as time is money for any business. Additionally, having to deploy just a few machines manually can be tedious, mind numbing, and time consuming for the indivdual tasked with setting things up. Essentially, **the faster you can do it, the better it is for both beneficiaries**. 
 
 -----
 
