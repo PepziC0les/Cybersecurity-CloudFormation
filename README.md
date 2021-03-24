@@ -252,6 +252,15 @@ If your ELK is successful, then feel free to hop back up to the top and explore 
 -----
 
 # Possible Mishaps
-
+### 502 Bad Gateway
+1. Assuming that you had deleted your NAT and Elastic IP, be sure to reinstall those into your VPC
+1a. Also be sure to reconnect Private route table to the NAT gateway
+2. Run all amazon instances (jumpbox, elk, dvwa, windows, and ansible in jumpbox)
+3. Once back to the point that all instances are running, transfer all .yml files and .pem into ansible
+4. Recreate Load Balancer and connect to dvwa targets
+5. Reconfigure /etc/ansible/hosts and /etc/ansible/ansible.cfg to suit current instances running and to target specific webaddresses (e.g. [elkservers] and the elkserver address in hosts file)
+- Note: Addresses change for your instances when rebooting everything from scratch (so machines were off originally and just turned back on, not the other reboot I think), this also implies redownloading the RDP client for Windows
+6. Modify .yml files to match current network (especially the filebeat and metricbeat)
+7. Rerun ansible-playbook on all .yml files
 
 -----
