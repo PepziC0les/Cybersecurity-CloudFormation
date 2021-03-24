@@ -22,7 +22,7 @@ Our subnets are also shown to be encapsulated in the diagram by the Availbility 
 
 
 # Understanding the Repository
-This repository is for helping and practicing setting up a basic cloud network on AWS to host ELK and DVWA servers. Other things to setup will be MetricBeat and FileBeat to be used on our ELK server. The primary files to be used are daemon.json and the files located in the "./Configs+Playbooks" folder. You can follow the diagram above to get a visual understanding of how the network will look like in the end. 
+This repository is for helping and practicing setting up a basic cloud network on AWS to host ELK and DVWA servers. Other things to setup will be MetricBeat and FileBeat to be used on our ELK server. The primary files to be used are daemon.json and the files located in the **"./Configs+Playbooks"** folder. You can follow the diagram above to get a visual understanding of how the network will look like in the end. 
 
 The files in the Configs+Playbooks folder are: 
 - Basic_Network_Cloud_Formation.yaml
@@ -39,11 +39,11 @@ NOTE: If you're not familiar with AWS, then it's strongly recommended to setup a
 
 **"ansible-playbook.yml"** is what we use in our Ansible process to automatically setup our targeted Ubuntu machines to become DVWA servers. Everything in ansible-playbook.yml should be fine to leave as it is (in other word's no modifications should be needed. Change otherwise if it does not suit your needs). 
 
-NOTE: If you're not familiar with DVWA, then look here for a simplified explanation. Otherwise skip to the next part. DVWA is also as the "Damn Vulnerable Web Application", and it is a web penetration practice site for penetration testers (similar to bWAPP and HackThisSite.org). By it's name, it should be obvious that it is very vulnerable, thus its a great way to learn and practice with to gain a better understanding of web vulnerabilities. It's useful to have this setup on our network so that we can monitor and analyze what's going on. Here we are learning how to set it up on our own machines (the Ubuntu cloud instance, not your personal machine).
+NOTE: If you're not familiar with DVWA, then look here for a simplified explanation. Otherwise skip to the next part. DVWA is the "Damn Vulnerable Web Application", a web penetration practice site for penetration testers (similar to bWAPP and HackThisSite.org). By it's name, it should be obvious that it is very vulnerable, thus its a great way to learn and practice with to gain a better understanding of web vulnerabilities. It's useful to have this setup on our network so that we can monitor and analyze what's going on. Here we are learning how to set it up on our own machines (the Ubuntu cloud instance, not your personal machine).
 
 **"install-elk.yml"** does the same as ansible-playbook.yml, but it's purpose is to turn one of our targeted Ubuntu machines into an ELK server. Everything in install-elk.yml should be fine to leave as is.
 
-NOTE: If you're not familiar with ELK, then look here for a simplified explanation. Otherwise skip to the next part. ELK is an acroynm that represents 3 widely used technologies: "Elasticsearch", "Logstash", and "Kibana". All 3 work in conjunction with one another to make analyzing and logging network activity more efficient in terms of understanding what is happening in our networks. We typically call it the ELK stack, and you can think of it as essentially 3 things stacked on top of one another with **E**lasticsearch on top, **L**ogstash in the middle, and **K**ibana at the bottom
+NOTE: If you're not familiar with ELK, then look here for a simplified explanation. Otherwise skip to the next part. ELK is an acroynm that represents 3 widely used technologies: "Elasticsearch", "Logstash", and "Kibana". All 3 work in conjunction with one another to make analyzing and logging network activity more efficient in terms of understanding what is happening in our networks. We typically call it the ELK stack, and you can think of it as essentially 3 things stacked on top of one another with **E**lasticsearch on top, **L**ogstash in the middle, and **K**ibana at the bottom **(ELK)**. 
 
 
 To start setting up your own basic network with instances, start off on the section, **"Creating our Cloud Stack"**. Otherwise if you're already ahead, look for the specific section that you feel best fits where you're at.
