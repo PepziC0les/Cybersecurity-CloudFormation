@@ -263,4 +263,9 @@ If your ELK is successful, then feel free to hop back up to the top and explore 
 6. Modify .yml files to match current network (especially the filebeat and metricbeat)
 7. Rerun ansible-playbook on all .yml files
 
+### DVWA Not Appearing on Web Browser
+
+
+### ELK Not Appearing on Web Browser
+
 -----
