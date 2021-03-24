@@ -49,7 +49,7 @@ NOTE: If you're not familiar with ELK, then look here for a simplified explanati
 
 In this industry where understanding and monitoring network activity is essential, we need to always record our network activity which can scale to unmanageable sizes. This is where Elasticsearch comes in. It improves searching among vastly large sets of logs by indexing each one of them. Logstash works in conjunction with Elasticsearch where it processes the log data and pipes it from multiple sources into Elasticsearch. The final component, Kibana, utilizes Elasticsearch to make everything readable. This application helps us visualize our data via graphs, histograms, picharts, and maps while also allowing us to manage the data from Elasticsearch (remember that these are all simplifications of what they are).
 
-**NOTE:** for these next 2 sections (filebeat-playbook.yml and metricbeat-playbook.yml), you must have the ELK stack already running. Otherwise jump right into the setup instructions.
+**NOTE:** for these next 2 sections (filebeat-playbook.yml and metricbeat-playbook.yml), you must have the ELK stack already running. Otherwise jump right into the setup instructions. Be sure to come back here when they're up and running!!
 
 **"filebeat-playbook.yml"** and **"filebeat.yml"** are both configuration files for setting up filebeat on our ELK stack. Before using them, you must modify them to point to your machine hosting the ELK stack. On filebeat.yml, simply search for the following via Crtl+F on the file: "output.elasticsearch" and "setup.kibana". Near them will be an IPv4 address next to "host(s)" that you need to replace with your own IPv4 address (the address of the ELK server). On filebeat-playbook.yml, you need to make sure that your ELK stack is already running. You must modiy the url next to "sudo curl" and "sudo dpkg" to match the urls on your ELK stack. To get to the page that shows this, go to .......
 
@@ -212,6 +212,7 @@ Ex: sudo docker cp Key1.pem ad314a9d:/root
 ansible-playbook ansible_config.yml --key-file=<key>
 ```
 - We do the same to setup our ELK instance, where we switch out the ansible_config.yml with "install_elk.yml".
+- **NOTE:** When running this command, our ELK server will begin running. Because we did not setup a daemon.json on the targeted Ubuntu machine yet, the server will be running on a different subnet. You can simply kill the process and the jump into the next step where we begin running our machines. The reason why we did not setup a daemon.json just yet was because we had yet to install the docker service where the path to store our daemon.json is in "/etc/docker". It's possible to do this beforehand, but that means you would have had to intsalled docker.io prior. 
 
 -----
 
@@ -236,13 +237,21 @@ sudo docker run -p 5601:5601 -p 9200:9200 -p 9300:9300 -p 9600:9600 -p 5044:5044
 -----
 
 # Testing our Servers
+This is where our Windows machine comes in. Using the Window's machine gives us a web browser to allow us to access the DVWA and ELK stack browser's in our network. Before doing this, make sure your servers are running, then log on to your remote Window's machine if you haven't. If you're currently unsure how to get to this point, select your Window's instance on the EC2 Instances page and select Connect. From here, you must download the RDP client to connect remotely. There will also be a "Get Password" box there. To do get your password, you need to upload the key you assigned to this machine and select decrypt once it's uploaded to get your password (should take at least 5 minutes for the option before it allows you to upload your key). Once decrypted, copy the password and paste it into your RDP client. 
 
------
+Once inside the Window's machine, search for Server Management on the search bar at the bottom right and go to local server and turn off ......... After doing this, now we want to open our web browser (Internet Explorer, Google Chrome, etc) on our Windows Machine. Minimize the Window's machine page and go abck to your EC2 page. Go to your load balancers and select the load balancer you had created. There will be a URL that you can copy and paste into your web browser inside the Windows machine.  
 
-# Setting up Metricbeat and Filebeat
+If you see DVWA appear on the web browser, then you're good to go! If not there may be a few issues that may have occurred. I have not ran into many issues myself but please refer to the **Possible Mishaps** section. I will point out crucial areas to check when setting up your server and what to look out for. 
+
+After the DVWA is setup, now we want to test out our ELK server. To do this, simply copy the IPv4 address of your ELK machine and paste it into the webbrowser of your Windows machine, and follow it up with the port number 5601. The url should follow the same format: **<IPv4>:5601**. 
+    
+If you see ELK appear, then you're good to go! If not, then refer to the **Possible Mishaps** section once more to see the potential issues once more.
+
+If your ELK is successful, then feel free to hop back up to the top and explore setting up filebeat and metricbeat on our ELK server. These will be viewed via Kibana.
 
 -----
 
 # Possible Mishaps
+
 
 -----
