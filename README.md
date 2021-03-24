@@ -46,15 +46,15 @@ The files in the Configs+Playbooks folder are:
 
 **"Basic_Network_Cloud_Formation.yaml"** is used to automatically deploy our network into AWS. It's recommended to play around with network setup yourself, but it's not explained here. If you're familiar with reading .yaml files, then it's strongly recommended to read through it and understand how each device interconnects with one another. If not, then you can refer to the network diagram on how it actually looks while ignorning the machine instances.
 
-NOTE: If you're not familiar with AWS, then it's strongly recommended to setup an account on there now and explore the site yourself for now. Jumping into this without prior knowledge may lead to more confusion rather than helping oneself. This is especially the case when rebooting our network. More on that at the bottom of this README.
+**NOTE:** If you're not familiar with AWS, then it's strongly recommended to setup an account on there now and explore the site yourself for now. Jumping into this without prior knowledge may lead to more confusion rather than helping oneself. This is especially the case when rebooting our network. More on that at the bottom of this README.
 
 **"ansible-playbook.yml"** is what we use in our Ansible process to automatically setup our targeted Ubuntu machines to become DVWA servers. Everything in ansible-playbook.yml should be fine to leave as it is (in other word's no modifications should be needed. Change otherwise if it does not suit your needs). 
 
-NOTE: If you're not familiar with DVWA, then look here for a simplified explanation. Otherwise skip to the next part (**"install-elk.yml"**). DVWA is the "Damn Vulnerable Web Application", a web penetration practice site for penetration testers (similar to bWAPP and HackThisSite.org). By it's name, it should be obvious that it is very vulnerable, thus its a great way to learn and practice with to gain a better understanding of web vulnerabilities. It's useful to have this setup on our network so that we can monitor and analyze what's going on. Here we are learning how to set it up on our own machines (the Ubuntu cloud instance, not your personal machine).
+**NOTE:** If you're not familiar with DVWA, then look here for a simplified explanation. Otherwise skip to the next part (**"install-elk.yml"**). DVWA is the "Damn Vulnerable Web Application", a web penetration practice site for penetration testers (similar to bWAPP and HackThisSite.org). By it's name, it should be obvious that it is very vulnerable, thus its a great way to learn and practice with to gain a better understanding of web vulnerabilities. It's useful to have this setup on our network so that we can monitor and analyze what's going on. Here we are learning how to set it up on our own machines (the Ubuntu cloud instance, not your personal machine).
 
 **"install-elk.yml"** does the same as ansible-playbook.yml, but it's purpose is to turn one of our targeted Ubuntu machines into an ELK server. Everything in install-elk.yml should be fine to leave as is.
 
-NOTE: If you're not familiar with ELK, then look here for a simplified explanation. Otherwise skip to the next part (**"filebeat-playbook.yml"**). ELK (also known as the ELK Stack) is an acroynm that represents 3 widely used open-source technologies: "**E**lasticsearch", "**L**ogstash", and "**K**ibana" **(ELK)**. All 3 work in conjunction with one another to make analyzing and logging network activity more efficient in terms of understanding what is happening in our networks. 
+**NOTE:** If you're not familiar with ELK, then look here for a simplified explanation. Otherwise skip to the next part (**"filebeat-playbook.yml"**). ELK (also known as the ELK Stack) is an acroynm that represents 3 widely used open-source technologies: "**E**lasticsearch", "**L**ogstash", and "**K**ibana" **(ELK)**. All 3 work in conjunction with one another to make analyzing and logging network activity more efficient in terms of understanding what is happening in our networks. 
 
 In this industry where understanding and monitoring network activity is essential, we need to always record our network activity which can scale to unmanageable sizes. This is where Elasticsearch comes in. It improves searching among vastly large sets of logs by indexing each one of them. Logstash works in conjunction with Elasticsearch where it processes the log data and pipes it from multiple sources into Elasticsearch. The final component, Kibana, utilizes Elasticsearch to make everything readable. This application helps us visualize our data via graphs, histograms, picharts, and maps while also allowing us to manage the data from Elasticsearch (remember that these are all simplifications of what they are).
 
@@ -197,7 +197,7 @@ sudo docker image pull cyberxsecurity/ansible
 ```bash
 sudo docker run -ti cyberxsecurity/ansible bash
 ```
-- If you had closed your other terminals, be sure to open at least 1 more and ssh into your Jumpbox once more (NOTE: do not close the terminal where you can see the running ansible process. If done, wait until we get to the part where we finish discussing getting the process ID).
+- If you had closed your other terminals, be sure to open at least 1 more and ssh into your Jumpbox once more (**NOTE:** do not close the terminal where you can see the running ansible process. If done, wait until we get to the part where we finish discussing getting the process ID).
 - Inside the Jumpbox, we want to look for our process ID of the running Ansible process. To do that use the following command:
 ```bash
 sudo docker ps
@@ -227,7 +227,7 @@ ansible-playbook ansible_config.yml --key-file=<key>
 
 # Running our Servers
 - Before running our servers, we to create a daemon.json for each of our servers. Do the same as we did when we created our first daemon.json by doing **"sudo nano /etc/docker/daemon.json"** in each of them, then copy the content of daemon.json in the git repository into daemon.jsons of the instances.
-    - NOTE: If any of docker processes are running on any of our private instances, stop them since we will be restarting docker. You can check for a running process by doing **"sudo docker ps"** and if you do find one that is running, kill it by doing **"sudo docker kill <process ID>"**
+    - **NOTE:** If any of docker processes are running on any of our private instances, stop them since we will be restarting docker. You can check for a running process by doing **"sudo docker ps"** and if you do find one that is running, kill it by doing **"sudo docker kill <process ID>"**
 - Restart the docker service once finished setting up our daemon.json file on each of the instances by doing the following:
 ```bash
 sudo service docker restart
