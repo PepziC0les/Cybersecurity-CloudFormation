@@ -30,7 +30,7 @@ Our subnets are also shown to be encapsulated in the diagram by the Availbility 
 |      Windows     	| Windows Machine 	| 10.10.0.x/24 	|     Public     	|   Windows-SG   	| Application 	|
 |   Amazon Linux   	| Ansible/Jumpbox 	| 10.10.0.x/24 	|     Public     	|   Jumpbox-SG   	|   Gateway   	|
 
-<center/>
+</center>
 
 -----
 
