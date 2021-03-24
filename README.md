@@ -21,6 +21,7 @@ Shown above is a diagram depicting how the network is configured where we have o
 Our subnets are also shown to be encapsulated in the diagram by the Availbility Zone used to host our virtual network. All connections are faciliated via the Internet Gateway, which is found on VPC1 and is connected to our "Public" subnets.
 
 <center>
+    
 | Operating System 	|       Name      	|    Subnet    	| Private/Public 	| Security Group 	|   Function  	|
 |:----------------:	|:---------------:	|:------------:	|:--------------:	|:--------------:	|:-----------:	|
 |      Ubuntu      	|    ELK Server   	| 10.10.2.x/24 	|     Private    	|  ELKServer-SG  	|    Server   	|
@@ -28,6 +29,7 @@ Our subnets are also shown to be encapsulated in the diagram by the Availbility 
 |      Ubuntu      	|  DVWA 2 Server  	| 10.10.2.x/24 	|     Private    	|  WebServer-SG  	|    Server   	|
 |      Windows     	| Windows Machine 	| 10.10.0.x/24 	|     Public     	|   Windows-SG   	| Application 	|
 |   Amazon Linux   	| Ansible/Jumpbox 	| 10.10.0.x/24 	|     Public     	|   Jumpbox-SG   	|   Gateway   	|
+
 <center/>
 
 -----
