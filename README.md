@@ -55,6 +55,8 @@ In this industry where understanding and monitoring network activity is essentia
 
 To start setting up your own basic network with instances, start off on the section, **"Creating our Cloud Stack"**. Otherwise if you're already ahead, look for the specific section that you feel best fits where you're at.
 
+-----
+
 # Creating our Cloud Stack
 Login into your AWS console and search for "CloudFormation"
 Select **"create stack"** and do the following:
@@ -65,6 +67,8 @@ Select **"create stack"** and do the following:
 Before setting up our instances, we want to modify our VPC configurations
 1. Search for VPC in the search bar and select VPC, then look for subnets and select subnets "Public1" and "Public2"
 2. Select the dropdown called "Actions" and select "Modify auto-assign IP settings". Once enside select the checkbox to enable auto-assign public IPv4 address.
+
+-----
 
 # Setting up our Amazon Instances
 Search for EC2 and select "Instances", and then create the following instances by selecting "Launch Instances":
@@ -120,6 +124,8 @@ Search for EC2 and select "Instances", and then create the following instances b
   - Should only have RDP as a rule
 - When prompted for key, create one if you do not have one. Creating keys allows you to download it onto Desktop for reuse on other AWS instances. Otherwise, choose existing.
 - Select Review and Launch
+
+-----
 
 # Creating the Load Balancer
 On the EC2 page, look for load balancers and once found, select create load balancer.
