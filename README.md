@@ -171,7 +171,22 @@ ansible-playbook ansible_config.yml --key-file=<key>
 - We do the same to setup our ELK instance, where we switch out the ansible_config.yml with "install_elk.yml".
 
 # Running our Servers
-- 
+- Before running our servers, we to create a daemon.json for each of our servers. Do the same as we did when we created our first daemon.json by doing "sudo nano /etc/docker/daemon.json" in each of them, then copy the content of daemon.json in the git repository into daemon.jsons of the instances.
+    - NOTE: If any of docker processes are running on any of our private instances, stop them since we will be restarting docker. You can check for a running process by doing "sudo docker ps" and if you do find one that is running, kill it by doing "sudo docker kill <process ID>"
+- Restart the docker service once finished setting up our daemon.json file on each of the instances by doing the following:
+```bash
+sudo service docker restart
+```
+- You can confirm it is running by doing "sudo service docker status"
+- Now we want to run our DVWA and ELK machines.
+- On the DVWA machines, run the following command:
+```bash
+sudo docker run -ti cyberxsecurity/dvwa
+```
+- On the ELK machine, run the following command:
+```bash
+sudo docker run -p 5601:5601 -p 9200:9200 -p 9300:9300 -p 9600:9600 -p 5044:5044 sebp/elk
+```
 
 # Testing our Servers
 
