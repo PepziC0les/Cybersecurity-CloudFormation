@@ -49,9 +49,11 @@ NOTE: If you're not familiar with ELK, then look here for a simplified explanati
 
 In this industry where understanding and monitoring network activity is essential, we need to always record our network activity which can scale to unmanageable sizes. This is where Elasticsearch comes in. It improves searching among vastly large sets of logs by indexing each one of them. Logstash works in conjunction with Elasticsearch where it processes the log data and pipes it from multiple sources into Elasticsearch. The final component, Kibana, utilizes Elasticsearch to make everything readable. This application helps us visualize our data via graphs, histograms, picharts, and maps while also allowing us to manage the data from Elasticsearch (remember that these are all simplifications of what they are).
 
-**"filebeat-playbook.yml"** and **"filebeat.yml"**
+**NOTE:** for these next 2 sections (filebeat-playbook.yml and metricbeat-playbook.yml), you must have the ELK stack already running. Otherwise jump right into the setup instructions.
 
-**"metricbeat-playbook.yml"** and **"metricbeat.yml"**
+**"filebeat-playbook.yml"** and **"filebeat.yml"** are both configuration files for setting up filebeat on our ELK stack. Before using them, you must modify them to point to your machine hosting the ELK stack. On filebeat.yml, simply search for the following via Crtl+F on the file: "output.elasticsearch" and "setup.kibana". Near them will be an IPv4 address next to "host(s)" that you need to replace with your own IPv4 address (the address of the ELK server). On filebeat-playbook.yml, you need to make sure that your ELK stack is already running. You must modiy the url next to "sudo curl" and "sudo dpkg" to match the urls on your ELK stack. To get to the page that shows this, go to .......
+
+**"metricbeat-playbook.yml"** and **"metricbeat.yml"** are both configuration files for setting up metricbeat on our ELK stack. Before using them, you must modify them to point to your machine hosting the ELK stack. To do this is to do the same thing we did for filebeat-playbook.yml and filebeat.yml. The only difference is the urls to change and the page to get to. To get to the page that shows this, go to .......
 
 To start setting up your own basic network with instances, start off on the section, **"Creating our Cloud Stack"**. Otherwise if you're already ahead, look for the specific section that you feel best fits where you're at.
 
