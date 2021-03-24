@@ -137,6 +137,8 @@ On the EC2 page, look for load balancers and once found, select create load bala
 - Note: If you already have a target group set for our DVWAs, skip step 6.
 7. Select next until you see "Create" and then select create.
 
+-----
+
 # Setting up our Instances for Deployment
 We want to connect to our instances now. Go back to the instances page and select "Connect" for our Jumpbox and copy the ssh command.
 - Open a Gitbash/Command Prompt terminal and change directories into the directory where your key(s) are/is stored.
@@ -203,6 +205,8 @@ ansible-playbook ansible_config.yml --key-file=<key>
 ```
 - We do the same to setup our ELK instance, where we switch out the ansible_config.yml with "install_elk.yml".
 
+-----
+
 # Running our Servers
 - Before running our servers, we to create a daemon.json for each of our servers. Do the same as we did when we created our first daemon.json by doing **"sudo nano /etc/docker/daemon.json"** in each of them, then copy the content of daemon.json in the git repository into daemon.jsons of the instances.
     - NOTE: If any of docker processes are running on any of our private instances, stop them since we will be restarting docker. You can check for a running process by doing **"sudo docker ps"** and if you do find one that is running, kill it by doing **"sudo docker kill <process ID>"**
@@ -221,8 +225,16 @@ sudo docker run -ti cyberxsecurity/dvwa
 sudo docker run -p 5601:5601 -p 9200:9200 -p 9300:9300 -p 9600:9600 -p 5044:5044 sebp/elk
 ```
 
+-----
+
 # Testing our Servers
+
+-----
 
 # Setting up Metricbeat and Filebeat
 
+-----
+
 # Possible Mishaps
+
+-----
