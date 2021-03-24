@@ -6,7 +6,7 @@
     <br>
 </p>
 <!-- markdownlint-enable MD033 -->
-
+-----
 # Purpose of the CloudFormation
 The CloudFormation built here demonstrates creating a basic network on AWS that utilizes DVWA and ELK servers for testing, practicing, and learning purposes. 
 <p align="center">
@@ -16,11 +16,9 @@ The CloudFormation built here demonstrates creating a basic network on AWS that 
 
 Shown here is a diagram depicting how the network is configured where we have our instances that we can connect to over the Internet in the "Public1" subnet, and our instances that we don't want accessed in our "Private1" subnet (Our ELK server and DVWA server). 
 
-We also
 
 Our subnets are also shown to be encapsulated in the diagram by the Availbility Zone used to host our virtual network. All connections are faciliated via the Internet Gateway, which is found on VPC1 and is connected to our "Public" subnets.
-
-
+-----
 # Understanding the Repository
 This repository is for helping and practicing setting up a basic cloud network on AWS to host ELK and DVWA servers. Other things to setup will be MetricBeat and FileBeat to be used on our ELK server. The primary files to be used are daemon.json and the files located in the **"./Configs+Playbooks"** folder. You can follow the diagram above to get a visual understanding of how the network will look like in the end. 
 
@@ -39,12 +37,17 @@ NOTE: If you're not familiar with AWS, then it's strongly recommended to setup a
 
 **"ansible-playbook.yml"** is what we use in our Ansible process to automatically setup our targeted Ubuntu machines to become DVWA servers. Everything in ansible-playbook.yml should be fine to leave as it is (in other word's no modifications should be needed. Change otherwise if it does not suit your needs). 
 
-NOTE: If you're not familiar with DVWA, then look here for a simplified explanation. Otherwise skip to the next part. DVWA is the "Damn Vulnerable Web Application", a web penetration practice site for penetration testers (similar to bWAPP and HackThisSite.org). By it's name, it should be obvious that it is very vulnerable, thus its a great way to learn and practice with to gain a better understanding of web vulnerabilities. It's useful to have this setup on our network so that we can monitor and analyze what's going on. Here we are learning how to set it up on our own machines (the Ubuntu cloud instance, not your personal machine).
+NOTE: If you're not familiar with DVWA, then look here for a simplified explanation. Otherwise skip to the next part (**"install-elk.yml"**). DVWA is the "Damn Vulnerable Web Application", a web penetration practice site for penetration testers (similar to bWAPP and HackThisSite.org). By it's name, it should be obvious that it is very vulnerable, thus its a great way to learn and practice with to gain a better understanding of web vulnerabilities. It's useful to have this setup on our network so that we can monitor and analyze what's going on. Here we are learning how to set it up on our own machines (the Ubuntu cloud instance, not your personal machine).
 
 **"install-elk.yml"** does the same as ansible-playbook.yml, but it's purpose is to turn one of our targeted Ubuntu machines into an ELK server. Everything in install-elk.yml should be fine to leave as is.
 
-NOTE: If you're not familiar with ELK, then look here for a simplified explanation. Otherwise skip to the next part. ELK is an acroynm that represents 3 widely used technologies: "Elasticsearch", "Logstash", and "Kibana". All 3 work in conjunction with one another to make analyzing and logging network activity more efficient in terms of understanding what is happening in our networks. We typically call it the ELK stack, and you can think of it as essentially 3 things stacked on top of one another with **E**lasticsearch on top, **L**ogstash in the middle, and **K**ibana at the bottom **(ELK)**. 
+NOTE: If you're not familiar with ELK, then look here for a simplified explanation. Otherwise skip to the next part (**"filebeat-playbook.yml"**). ELK (also known as the ELK Stack) is an acroynm that represents 3 widely used open-source technologies: "**E**lasticsearch", "**L**ogstash", and "**K**ibana" **(ELK)**. All 3 work in conjunction with one another to make analyzing and logging network activity more efficient in terms of understanding what is happening in our networks. 
 
+In this industry where understanding and monitoring network activity is essential, we need to always record our network activity which can scale to unmanageable sizes. This is where Elasticsearch comes in. It improves searching among vastly large sets of logs by indexing each one of them. Logstash works in conjunction with Elasticsearch where it processes the log data and pipes it from multiple sources into Elasticsearch. The final component, Kibana, utilizes Elasticsearch to make everything readable. This application helps us visualize our data via graphs, histograms, picharts, and maps while also allowing us to manage the data from Elasticsearch (remember that these are all simplifications of what they are).
+
+**"filebeat-playbook.yml"** and **"filebeat.yml"**
+
+**"metricbeat-playbook.yml"** and **"metricbeat.yml"**
 
 To start setting up your own basic network with instances, start off on the section, **"Creating our Cloud Stack"**. Otherwise if you're already ahead, look for the specific section that you feel best fits where you're at.
 
