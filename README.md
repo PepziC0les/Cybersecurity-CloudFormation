@@ -6,7 +6,9 @@
     <br>
 </p>
 <!-- markdownlint-enable MD033 -->
+
 -----
+
 # Purpose of the CloudFormation
 The CloudFormation built here demonstrates creating a basic network on AWS that utilizes DVWA and ELK servers for testing, practicing, and learning purposes. 
 <p align="center">
@@ -18,7 +20,9 @@ Shown here is a diagram depicting how the network is configured where we have ou
 
 
 Our subnets are also shown to be encapsulated in the diagram by the Availbility Zone used to host our virtual network. All connections are faciliated via the Internet Gateway, which is found on VPC1 and is connected to our "Public" subnets.
+
 -----
+
 # Understanding the Repository
 This repository is for helping and practicing setting up a basic cloud network on AWS to host ELK and DVWA servers. Other things to setup will be MetricBeat and FileBeat to be used on our ELK server. The primary files to be used are daemon.json and the files located in the **"./Configs+Playbooks"** folder. You can follow the diagram above to get a visual understanding of how the network will look like in the end. 
 
