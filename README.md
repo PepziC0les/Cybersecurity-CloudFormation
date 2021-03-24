@@ -83,6 +83,7 @@ Before setting up our instances, we want to modify our VPC configurations
 
 # Setting up our Amazon Instances
 Search for EC2 and select "Instances", and then create the following instances by selecting "Launch Instances":
+
 **1. Amazon Linux 2 AMI (HVM), SSD Volume Type**
 - Only need 1 Amazon Linux.
 - Click next and select t2.micro
