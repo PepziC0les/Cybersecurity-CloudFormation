@@ -245,14 +245,17 @@ Ex: sudo docker cp Key1.pem ad314a9d:/root
     - Save and exit out of ansible.cfg.
 
 **Modifying hosts file**
+
 ![Modifying Hosts](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Modifying_Hosts.gif)
 
 **Modifying ansible.cfg file**
+
 ![Modifying Ansible.cfg](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Modifying_Ansible_cfg.gif)
 
 - Back inside our Ansible process, we must ssh into our private instances and then exit out of them (this is so that our current Ansible can establish connections later on again).
 
 **SSHing into machines**
+
 ![SSH Setup](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/SSH_Setup_on_Ansible.gif)
 
 - Once sshing into each of the private instances is done, run the following command to begin setting up our DVWA machines:
