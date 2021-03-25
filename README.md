@@ -69,9 +69,17 @@ In this industry where understanding and monitoring network activity is essentia
 
 **NOTE:** for these next 2 sections (filebeat-playbook.yml and metricbeat-playbook.yml), you must have the ELK stack already running. Otherwise jump right into the setup instructions. Be sure to come back here when they're up and running!!
 
-**"filebeat-playbook.yml"** and **"filebeat.yml"** are both configuration files for setting up filebeat on our ELK stack. Before using them, you must modify them to point to your machine hosting the ELK stack. On filebeat.yml, simply search for the following via Crtl+F on the file: "output.elasticsearch" and "setup.kibana". Near them will be an IPv4 address next to "host(s)" that you need to replace with your own IPv4 address (the address of the ELK server). On filebeat-playbook.yml, you need to make sure that your ELK stack is already running. You must modiy the url next to "sudo curl" and "sudo dpkg" to match the urls on your ELK stack. To get to the page that shows this, go to .......
+**"filebeat-playbook.yml"** and **"filebeat.yml"** are both configuration files for setting up filebeat on our ELK stack. Before using them, you must modify them to point to your machine hosting the ELK stack. 
 
-**"metricbeat-playbook.yml"** and **"metricbeat.yml"** are both configuration files for setting up metricbeat on our ELK stack. Before using them, you must modify them to point to your machine hosting the ELK stack. To do this is to do the same thing we did for filebeat-playbook.yml and filebeat.yml. The only difference is the urls to change and the page to get to. To get to the page that shows this, go to .......
+On filebeat.yml, simply search for the following via Crtl+F on the file: "output.elasticsearch" and "setup.kibana". Near them will be an IPv4 address next to "host(s)" that you need to replace with your own IPv4 address (the address of the ELK server). 
+
+On filebeat-playbook.yml, you need to make sure that your ELK stack is already running. You must modiy the url next to "sudo curl" and "sudo dpkg" to match the urls shown on Kibana. To get to the page that shows this, go to either Logstash Logs or Elasticsearch Logs under the tutorials page. You can also add the following query to your URL to get to this tutorial page: '/app/kibana#/home/tutorial_directory/'.
+
+![Locating Filebeat](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Locating_Filebeat_URL.gif)
+
+**"metricbeat-playbook.yml"** and **"metricbeat.yml"** are both configuration files for setting up metricbeat on our ELK stack. Before using them, you must modify them to point to your machine hosting the ELK stack. To do this is to do the same thing we did for filebeat-playbook.yml and filebeat.yml. The only difference is the urls to change and the page to get to. To get to the page that shows this, go to either Logstash Metrics or Elasticsearch Metrics under the tutorials page.
+
+![Locating Metricbeat](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Locating_Metricbeat_URL.gif)
 
 To start setting up your own basic network with instances, start off on the section, **"Creating our Cloud Stack"**. Otherwise if you're already ahead, look for the specific section that you feel best fits where you're at.
 
@@ -294,7 +302,7 @@ This is where our Windows machine comes in. Using the Window's machine gives us 
 
 ![Downloading RDP](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Downloading_RDP.gif)
 
-Once inside the Window's machine, search for Server Management on the search bar at the bottom right and go to local server and turn off ......... After doing this, now we want to open our web browser (Internet Explorer, Google Chrome, etc) on our Windows Machine. Minimize the Window's machine page and go abck to your EC2 page. Go to your load balancers and select the load balancer you had created. There will be a URL that you can copy and paste into your web browser inside the Windows machine.  
+Once inside the Window's machine, search for "Server Management" on the search bar at the bottom right and go to "local server" and select off for all settings by selecting "IE Enhanced Security Configuration". After doing this, now we want to open our web browser (Internet Explorer, Google Chrome, etc) on our Windows Machine. Minimize the Window's machine page and go abck to your EC2 page. Go to your load balancers and select the load balancer you had created. There will be a URL that you can copy and paste into your web browser inside the Windows machine.  
 
 **Disabling Internet Explorer Security Configurations**
 
