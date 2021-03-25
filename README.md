@@ -88,6 +88,9 @@ Before setting up our instances, we want to modify our VPC configurations
 1. Search for VPC in the search bar and select VPC, then look for subnets and select subnets "Public1" and "Public2"
 2. Select the dropdown called "Actions" and select "Modify auto-assign IP settings". Once enside select the checkbox to enable auto-assign public IPv4 address.
 
+![Subnet Enable IPv6](https://pi-hole.github.io/graphics/Screenshots/blacklist-cli.gif)
+
+
 -----
 
 # Setting up our Amazon Instances
