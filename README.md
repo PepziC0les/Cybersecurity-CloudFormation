@@ -53,7 +53,12 @@ This document contains the following details:
 - Creating the Load Balancer
 - Setting Up Instances for Deployment
     - Connecting to our Instances
-    - 
+    - Transfering our Files
+    - Setting Up our Environments
+    - Going Inside Ansible
+        - Modifying hosts file
+        - Modifying ansible.cfg file
+        - SSHing into machines
 - Running Our Servers
 - Testing Our Servers
 - Possible Mishaps (Troubleshooting)
@@ -276,6 +281,9 @@ sudo docker cp <file> <process ID>:/root
 Ex: sudo docker cp Key1.pem ad314a9d:/root
 ```
 - Repeat the command above with each file in your Jumpbox.
+
+**Going Inside Ansible**
+
 - Go back to your Ansible process now. We have to modify our /etc/ansible/hosts and /etc/ansible/ansible.cfg files so that they can communicate with our Ubuntu instances. To do so nano both of those files (no need to add sudo at the beginning).
     - Inside the hosts file, look for '[webservers]' and remove the '#' symbols before it. Now add the private IPv4 addresses of your DVWA instances below it
     - Still inside the hosts file, add '[elkservers]' below the IPv4 addresses you had just added, and now add the IPv4 address of your ELK machine beneath '[elkservers]'
