@@ -45,28 +45,28 @@ As industries move forward and into the cloud, the demand for cloud practicioner
 # Navigating the Repository
 This document contains the following details:
 - [Understanding the Repository](#understanding-the-repository)
-    - What To Modify and What Not To
+    - [What To Modify and What Not To](#what-to-modify-and-what-not-to)
 - [Creating our Cloudstack](#creating-our-cloud-stack)
-- Setting Up our Amazon Instances
-    - Ansible/Jumpbox (Amazon Linux 2)
-    - DVWA + ELK Servers (Ubuntu Servers)
-    - Windows Host Application (Windows 2019 Server)
+- [Setting Up our Amazon Instances](#setting-up-our-amazon-instances)
+    - [Ansible/Jumpbox (Amazon Linux 2)](#1-amazon-linux-2-ami-hvm-ssd-volume-type)
+    - [DVWA + ELK Servers (Ubuntu Servers)](#2-ubuntu-server-2004-lts-hvm-ssd-volume-type)
+    - [Windows Host Application (Windows 2019 Server)](#3-microsoft-windows-server-2019-base)
 - [Creating the Load Balancer](#creating-the-load-balancer)
 - [Setting Up Instances for Deployment](#setting-up-instances-for-deployment)
-    - Connecting to our Instances
-    - Transfering our Files
-    - Setting Up our Environments
-    - Going Inside Ansible
-        - Modifying hosts file
-        - Modifying ansible.cfg file
-        - SSHing into machines
+    - [Connecting to our Instances](#connecting-to-our-instances)
+    - [Transfering our Files](#transfering-our-files)
+    - [Setting Up our Environments](#setting-up-our-environments)
+    - [Going Inside Ansible](#going-inside-ansible)
+        - [Modifying hosts file](#modifying-hosts-file)
+        - [Modifying ansible.cfg file](#modifying-ansiblecfg-file)
+        - [SSHing into machines](#sshing-into-machines)
 - [Running Our Servers](#running-our-servers)
 - [Testing Our Servers](#testing-our-servers)
-    - Downloading the RDP Client
-        - Disabling Internet Explorer Security Configurations
-        - Getting the Load Balancer DNS Name for our DVWA
-    - How DVWA Looks Like
-    - How ELK Looks Like 
+    - [Downloading the RDP Client](#downloading-rdp)
+        - [Disabling Internet Explorer Security Configurations](#disabling-internet-explorer-security-configurations)
+        - [Getting the Load Balancer DNS Name for our DVWA](#getting-the-load-balancer-dns-name-for-our-dvwa)
+    - [How DVWA Looks Like](#how-dvwa-looks-like)
+    - [How ELK Looks Like](#how-elk-looks-like)
 - [Possible Mishaps (Troubleshooting)](#possible-mishaps)
 
 -----
