@@ -45,7 +45,7 @@ As industries move forward and into the cloud, the demand for cloud practicioner
 # Navigating the Repository
 This document contains the following details:
 - [Understanding the Repository](#understanding-the-repository)
-    - [What To Modify and What Not To](#what-to-modify-and-what-not-to)
+    - [What To Modify and What Not To (Beats, Playbook, and Configs)](#what-to-modify-and-what-not-to)
 - [Creating our Cloudstack](#creating-our-cloud-stack)
 - [Setting Up our Amazon Instances](#setting-up-our-amazon-instances)
     - [Ansible/Jumpbox (Amazon Linux 2)](#1-amazon-linux-2-ami-hvm-ssd-volume-type)
