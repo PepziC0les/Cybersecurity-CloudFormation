@@ -231,7 +231,7 @@ Ex: sudo docker cp Key1.pem ad314a9d:/root
 ansible-playbook ansible_config.yml --key-file=<key>
 ```
 - We do the same to setup our ELK instance, where we switch out the ansible_config.yml with "install_elk.yml".
-- **NOTE:** When running this command, our ELK server will begin running. Because we did not setup a daemon.json on the targeted Ubuntu machine yet, the server will be running on a different subnet. You can simply kill the process and the jump into the next step where we begin running our machines. The reason why we did not setup a daemon.json just yet was because we had yet to install the docker service where the path to store our daemon.json is in "/etc/docker". It's possible to do this beforehand, but that means you would have had to intsalled docker.io prior. 
+- **NOTE:** When running this command, our ELK server will begin running. Because we did not setup a daemon.json on the targeted Ubuntu machine yet, the server will be running on a different subnet. You can simply kill the process and then start the next step where we begin running our machines. The reason why we did not setup a daemon.json just yet was because we had yet to install the docker service where the path to store our daemon.json is in "/etc/docker". It's possible to do this beforehand, but that means you would have had to intsalled docker.io prior. 
 
 -----
 
