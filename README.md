@@ -88,7 +88,7 @@ Before setting up our instances, we want to modify our VPC configurations
 1. Search for VPC in the search bar and select VPC, then look for subnets and select subnets "Public1" and "Public2"
 2. Select the dropdown called "Actions" and select "Modify auto-assign IP settings". Once enside select the checkbox to enable auto-assign public IPv4 address.
 
-![Subnet Enable IPv6](https://pi-hole.github.io/graphics/Screenshots/blacklist-cli.gif)
+![Subnet Enable IPv6](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Enabling_Auto-Assign.gif)
 
 
 -----
@@ -107,6 +107,8 @@ Search for EC2 and select "Instances", and then create the following instances b
   - Should only have SSH as a rule
 - When prompted for key, create one if you do not have one. Creating keys allows you to download it onto Desktop for reuse on other AWS instances. Otherwise, choose existing.
 - Select Review and Launch
+
+![Creating an Instance](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Creating_Instance.gif)
 
 **2. Ubuntu Server 20.04 LTS (HVM), SSD Volume Type**
 - Need 3 Amazon Linux.
@@ -167,6 +169,8 @@ On the EC2 page, look for load balancers and once found, select create load bala
 - Note: If you already have a target group set for our DVWAs, skip step 6.
 7. Select next until you see "Create" and then select create.
 
+![Creating a Load Balancer](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Creating_Load_Balancer.gif)
+
 -----
 
 # Setting up our Instances for Deployment
@@ -176,6 +180,8 @@ We want to connect to our instances now. Go back to the instances page and selec
 ```bash
 ssh -i <key> <user>@<destination>
 ```
+![Connecting to Jumpbox](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Connecting_to_Jumpbox.gif)
+
 - We want to transfer all our important configuration + key files (key files meaning keys) before moving on. To do that, it's recommended to open at least 1 more terminal (Gitbash or Command Prompt). The following command will allow you to transfer 1 or more files:
 ```bash
 scp -i <key> <file name(s)> <user>@<destination>:/path/to/home/directory
@@ -201,6 +207,9 @@ sudo nano /etc/docker/daemon.json
 ```bash
 sudo service docker start
 ```
+
+![Starting Docker](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Starting_Docker.gif)
+
 - To check if the service is running, you can do **"sudo service docker status"** (optional)
 - Follow it with the next command which pulls the ansible image (in other words, downloads it into our Jumpbox):
 ```bash
@@ -210,11 +219,17 @@ sudo docker image pull cyberxsecurity/ansible
 ```bash
 sudo docker run -ti cyberxsecurity/ansible bash
 ```
+
+![Starting Ansible](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Starting_Ansible.png)
+
 - If you had closed your other terminals, be sure to open at least 1 more and ssh into your Jumpbox once more (**NOTE:** do not close the terminal where you can see the running ansible process. If done, wait until we get to the part where we finish discussing getting the process ID).
 - Inside the Jumpbox, we want to look for our process ID of the running Ansible process. To do that use the following command:
 ```bash
 sudo docker ps
 ```
+
+![Checking Ansible Running](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Checking_Ansilbe_if_Running.PNG)
+
 - Copy the value underneath process ID by highlighting it and keep that saved. If you had mistakingly exited or stopped the Ansible process, you can either reuse the **"sudo docker run -ti cyberxsecurity/ansible bash"** again if you did not see a process ID, or run **"sudo docker attach <process ID>"** to reenter the process.
 - We want to use the process ID to transfer our files (keys + configuration files) to our Ansible process. We can only trasnfer files 1 at a time using the following command:
 ```bash
@@ -228,6 +243,11 @@ Ex: sudo docker cp Key1.pem ad314a9d:/root
     - Save your changes and exit, and now nano /etc/ansible/ansible.cfg.
     - Inside ansible.cfg, look for "remote_user = root" and change the variable to equal "ubuntu".
     - Save and exit out of ansible.cfg.
+
+![Modifying Hosts](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Modifying_Hosts.gif)
+
+![Modifying Ansible.cfg](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Modifying_Ansible_cfg.gif)
+
 - Back inside our Ansible process, we must ssh into our private instances and then exit out of them (this is so that our current Ansible can establish connections later on again).
 - Once sshing into each of the private instances is done, run the following command to begin setting up our DVWA machines:
 ```bash
