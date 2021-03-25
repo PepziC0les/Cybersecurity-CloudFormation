@@ -244,11 +244,17 @@ Ex: sudo docker cp Key1.pem ad314a9d:/root
     - Inside ansible.cfg, look for "remote_user = root" and change the variable to equal "ubuntu".
     - Save and exit out of ansible.cfg.
 
+**Modifying hosts file**
 ![Modifying Hosts](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Modifying_Hosts.gif)
 
+**Modifying ansible.cfg file**
 ![Modifying Ansible.cfg](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Modifying_Ansible_cfg.gif)
 
 - Back inside our Ansible process, we must ssh into our private instances and then exit out of them (this is so that our current Ansible can establish connections later on again).
+
+**SSHing into machines**
+![SSH Setup](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/SSH_Setup_on_Ansible.gif)
+
 - Once sshing into each of the private instances is done, run the following command to begin setting up our DVWA machines:
 ```bash
 ansible-playbook ansible_config.yml --key-file=<key>
@@ -280,6 +286,8 @@ sudo docker run -p 5601:5601 -p 9200:9200 -p 9300:9300 -p 9600:9600 -p 5044:5044
 
 # Testing our Servers
 This is where our Windows machine comes in. Using the Window's machine gives us a web browser to allow us to access the DVWA and ELK stack browser's in our network. Before doing this, make sure your servers are running, then log on to your remote Window's machine if you haven't. If you're currently unsure how to get to this point, select your Window's instance on the EC2 Instances page and select Connect. From here, you must download the RDP client to connect remotely. There will also be a "Get Password" box there. To do get your password, you need to upload the key you assigned to this machine and select decrypt once it's uploaded to get your password (should take at least 5 minutes for the option before it allows you to upload your key). Once decrypted, copy the password and paste it into your RDP client. 
+
+
 
 Once inside the Window's machine, search for Server Management on the search bar at the bottom right and go to local server and turn off ......... After doing this, now we want to open our web browser (Internet Explorer, Google Chrome, etc) on our Windows Machine. Minimize the Window's machine page and go abck to your EC2 page. Go to your load balancers and select the load balancer you had created. There will be a URL that you can copy and paste into your web browser inside the Windows machine.  
 
