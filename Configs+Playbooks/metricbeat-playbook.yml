@@ -5,11 +5,11 @@
   tasks:
     # Use command module
   - name: Download metricbeat
-    command: sudo curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.11.1-amd64.deb
+    command: sudo curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.11.1-amd64.deb #Change this URL to yours
 
     # Use command module
   - name: install metricbeat
-    command: sudo dpkg -i metricbeat-7.11.1-amd64.deb
+    command: sudo dpkg -i metricbeat-7.11.1-amd64.deb #Change file to match the necessary package to download (should match the end of the URL)
 
     # Use copy module
   - name: drop in metricbeat config
