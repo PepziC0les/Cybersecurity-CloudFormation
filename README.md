@@ -2,7 +2,7 @@
 <!-- markdownlint-configure-file { "MD004": { "style": "consistent" } } -->
 <!-- markdownlint-disable MD033 -->
 <p align="center">
-    <img src="./image.png" width="685" height="300" alt="Pi-hole">
+    <img src="./image.png" width="685" height="300">
     <br>
 </p>
 <!-- markdownlint-enable MD033 -->
