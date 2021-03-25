@@ -44,15 +44,15 @@ As industries move forward and into the cloud, the demand for cloud practicioner
 
 # Navigating the Repository
 This document contains the following details:
-- [Understanding the Repository]()
+- [Understanding the Repository](#understanding-the-repository)
     - What To Modify and What Not To
-- Creating our Cloudstack
+- [Creating our Cloudstack](#creating-our-cloud-stack)
 - Setting Up our Amazon Instances
     - Ansible/Jumpbox (Amazon Linux 2)
     - DVWA + ELK Servers (Ubuntu Servers)
     - Windows Host Application (Windows 2019 Server)
-- Creating the Load Balancer
-- Setting Up Instances for Deployment
+- [Creating the Load Balancer](#creating-the-load-balancer)
+- [Setting Up Instances for Deployment](#setting-up-instances-for-deployment)
     - Connecting to our Instances
     - Transfering our Files
     - Setting Up our Environments
@@ -60,14 +60,14 @@ This document contains the following details:
         - Modifying hosts file
         - Modifying ansible.cfg file
         - SSHing into machines
-- Running Our Servers
-- Testing Our Servers
+- [Running Our Servers](#running-our-servers)
+- [Testing Our Servers](#testing-our-servers)
     - Downloading the RDP Client
         - Disabling Internet Explorer Security Configurations
         - Getting the Load Balancer DNS Name for our DVWA
     - How DVWA Looks Like
     - How ELK Looks Like 
-- Possible Mishaps (Troubleshooting)
+- [Possible Mishaps (Troubleshooting)](#possible-mishaps)
 
 -----
 
