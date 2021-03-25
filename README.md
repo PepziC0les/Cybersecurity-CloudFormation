@@ -77,9 +77,11 @@ On filebeat-playbook.yml, you need to make sure that your ELK stack is already r
 
 ![Locating Filebeat](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Locating_Filebeat_URL.gif)
 
-**"metricbeat-playbook.yml"** and **"metricbeat.yml"** are both configuration files for setting up metricbeat on our ELK stack. Before using them, you must modify them to point to your machine hosting the ELK stack. To do this is to do the same thing we did for filebeat-playbook.yml and filebeat.yml. The only difference is the urls to change and the page to get to. To get to the page that shows this, go to either Logstash Metrics or Elasticsearch Metrics under the tutorials page.
+**"metricbeat-playbook.yml"** and **"metricbeat.yml"** are both configuration files for setting up metricbeat on our ELK stack. Before using them, you must modify them to point to your machine hosting the ELK stack. To do this is to do the same thing we did for filebeat-playbook.yml and filebeat.yml. The only difference is the urls to change and the page to get to. To get to the page that shows this, go to either Logstash Metrics, Kibana metrics, or Elasticsearch Metrics under the tutorials page.
 
 ![Locating Metricbeat](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Locating_Metricbeat_URL.gif)
+
+To confirm that these 2 have been successfully uploaded, simply scroll down to the bottom of both pages and select the "Check Data" button to confirm that it has been installed successfully.
 
 To start setting up your own basic network with instances, start off on the section, **"Creating our Cloud Stack"**. Otherwise if you're already ahead, look for the specific section that you feel best fits where you're at.
 
@@ -302,11 +304,15 @@ This is where our Windows machine comes in. Using the Window's machine gives us 
 
 ![Downloading RDP](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Downloading_RDP.gif)
 
-Once inside the Window's machine, search for "Server Management" on the search bar at the bottom right and go to "local server" and select off for all settings by selecting "IE Enhanced Security Configuration". After doing this, now we want to open our web browser (Internet Explorer, Google Chrome, etc) on our Windows Machine. Minimize the Window's machine page and go abck to your EC2 page. Go to your load balancers and select the load balancer you had created. There will be a URL that you can copy and paste into your web browser inside the Windows machine.  
+Once inside the Window's machine, search for "Server Management" on the search bar at the bottom right and go to "local server" and select off for all settings by selecting "IE Enhanced Security Configuration". After doing this, now we want to open our web browser (Internet Explorer, Google Chrome, etc) on our Windows Machine. Minimize the Window's machine page and go back to your EC2 page. Go to your load balancers and select the load balancer you had created. There will be a URL that you can copy and paste into your web browser inside the Windows machine.  
 
 **Disabling Internet Explorer Security Configurations**
 
 ![Disabling Sec Configs](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Disabling_Security_config.gif)
+
+**Getting the Load Balancer DNS Name for our DVWA**
+
+![Getting into DVWA](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Load_Balancer_DNSName.PNG)
 
 If you see DVWA appear on the web browser, then you're good to go! If not there may be a few issues that may have occurred. I have not ran into many issues myself but please refer to the **Possible Mishaps** section. I will point out crucial areas to check when setting up your server and what to look out for. 
 
