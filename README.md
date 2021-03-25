@@ -44,7 +44,7 @@ As industries move forward and into the cloud, the demand for cloud practicioner
 
 # Navigating the Repository
 This document contains the following details:
-- [Understanding the Repository](# Understanding the Repository)
+- [Understanding the Repository]()
     - What To Modify and What Not To
 - Creating our Cloudstack
 - Setting Up our Amazon Instances
