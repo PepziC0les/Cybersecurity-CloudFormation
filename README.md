@@ -61,6 +61,11 @@ This document contains the following details:
         - SSHing into machines
 - Running Our Servers
 - Testing Our Servers
+    - Downloading the RDP Client
+        - Disabling Internet Explorer Security Configurations
+        - Getting the Load Balancer DNS Name for our DVWA
+    - How DVWA Looks Like
+    - How ELK Looks Like 
 - Possible Mishaps (Troubleshooting)
 
 -----
