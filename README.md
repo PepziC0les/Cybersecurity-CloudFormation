@@ -85,7 +85,7 @@ The files in the Configs+Playbooks folder are:
 
 You will notice that we have "Beats" files and wonder how they are included in our ELK stack. ELK had included beats such as filebeat and metricbeat (there are plenty more like packetbeat, auditbeat, winlogbeat, etc. Refer to their page for more!) to act as an extension for log handling. As for specifically what they are, beats are essentially tools that help facilitate what kind of data you want to send to Elasticsearch. For our case, we want to use Filebeat and Metricbeat. Filebeat is a type of framework that reads files from our system (e.g. system and application log files) and centralizes them in an efficient manner, allowing us to be able to access these files and view them. Metricbeat on the otherhand is more useful for collecting metrics and statistics on our servers and systems. Both Filebeat and Metricbeat pipe this data to Elasticsearch and Logstash, allowing us to view these via Kibana.
 
-**What To Modify and What Not To**
+## **What To Modify and What Not To**
 
 **"Basic_Network_Cloud_Formation.yaml"** is used to automatically deploy our network into AWS. It's recommended to play around with network setup yourself, but it's not explained here. If you're familiar with reading .yaml files, then it's strongly recommended to read through it and understand how each device interconnects with one another. If not, then you can refer to the network diagram on how it actually looks while ignorning the machine instances.
 
@@ -140,7 +140,7 @@ Before setting up our instances, we want to modify our VPC configurations
 # Setting up our Amazon Instances
 Search for EC2 and select "Instances", and then create the following instances by selecting "Launch Instances":
 
-**1. Amazon Linux 2 AMI (HVM), SSD Volume Type**
+## **1. Amazon Linux 2 AMI (HVM), SSD Volume Type**
 - Only need 1 Amazon Linux.
 - Click next and select t2.micro
 - Click Next and modify network and subnet:
@@ -154,7 +154,7 @@ Search for EC2 and select "Instances", and then create the following instances b
 
 ![Creating an Instance](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Creating_Instance.gif)
 
-**2. Ubuntu Server 20.04 LTS (HVM), SSD Volume Type**
+## **2. Ubuntu Server 20.04 LTS (HVM), SSD Volume Type**
 - Need 3 Amazon Linux.
 - For first 2 (Our DVWA servers):
   - Click next and select t2.micro
@@ -183,7 +183,7 @@ Search for EC2 and select "Instances", and then create the following instances b
   - When prompted for key, create one if you do not have one. Creating keys allows you to download it onto Desktop for reuse on other AWS instances. Otherwise, choose existing.
   - Select Review and Launch
 
-**3. Microsoft Windows Server 2019 Base**
+## **3. Microsoft Windows Server 2019 Base**
 - Only need 1 Windows instance.
 - Click next and select t2.micro
 - Click Next and modify network and subnet:
@@ -219,7 +219,7 @@ On the EC2 page, look for load balancers and once found, select create load bala
 
 # Setting up our Instances for Deployment
 
-**Connecting to our Instances**
+## **Connecting to our Instances**
 
 We want to connect to our instances now. Go back to the instances page and select "Connect" for our Jumpbox and copy the ssh command.
 - Open a Gitbash/Command Prompt terminal and change directories into the directory where your key(s) are/is stored.
@@ -229,7 +229,7 @@ ssh -i <key> <user>@<destination>
 ```
 ![Connecting to Jumpbox](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Connecting_to_Jumpbox.gif)
 
-**Transfering our Files**
+## **Transfering our Files**
 
 - We want to transfer all our important configuration + key files (key files meaning keys) before moving on. To do that, it's recommended to open at least 1 more terminal (Gitbash or Command Prompt). The following command will allow you to transfer 1 or more files:
 ```bash
@@ -237,7 +237,7 @@ scp -i <key> <file name(s)> <user>@<destination>:/path/to/home/directory
 Ex: scp -i Virginia.pem Virginia.pem ansible_config.yml thisuser@ec2.amazon.someinstance:/home/ec2-user
 ```
 
-**Setting Up our Environments**
+## **Setting Up our Environments**
 
 - ssh into each of your private Ubuntu instances using your keys and their private IPv4 addresses and update/upgrade them using the following commands:
 ```bash
@@ -290,7 +290,7 @@ Ex: sudo docker cp Key1.pem ad314a9d:/root
 ```
 - Repeat the command above with each file in your Jumpbox.
 
-**Going Inside Ansible**
+## **Going Inside Ansible**
 
 - Go back to your Ansible process now. We have to modify our /etc/ansible/hosts and /etc/ansible/ansible.cfg files so that they can communicate with our Ubuntu instances. To do so nano both of those files (no need to add sudo at the beginning).
     - Inside the hosts file, look for '[webservers]' and remove the '#' symbols before it. Now add the private IPv4 addresses of your DVWA instances below it
@@ -299,17 +299,17 @@ Ex: sudo docker cp Key1.pem ad314a9d:/root
     - Inside ansible.cfg, look for "remote_user = root" and change the variable to equal "ubuntu".
     - Save and exit out of ansible.cfg.
 
-**Modifying hosts file**
+## **Modifying hosts file**
 
 ![Modifying Hosts](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Modifying_Hosts.gif)
 
-**Modifying ansible.cfg file**
+## **Modifying ansible.cfg file**
 
 ![Modifying Ansible.cfg](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Modifying_Ansible_cfg.gif)
 
 - Back inside our Ansible process, we must ssh into our private instances and then exit out of them (this is so that our current Ansible can establish connections later on again).
 
-**SSHing into machines**
+## **SSHing into machines**
 
 ![SSH Setup](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/SSH_Setup_on_Ansible.gif)
 
@@ -345,30 +345,30 @@ sudo docker run -p 5601:5601 -p 9200:9200 -p 9300:9300 -p 9600:9600 -p 5044:5044
 # Testing our Servers
 This is where our Windows machine comes in. Using the Window's machine gives us a web browser to allow us to access the DVWA and ELK stack browser's in our network. Before doing this, make sure your servers are running, then log on to your remote Window's machine if you haven't. If you're currently unsure how to get to this point, select your Window's instance on the EC2 Instances page and select Connect. From here, you must download the RDP client to connect remotely. There will also be a "Get Password" box there. To do get your password, you need to upload the key you assigned to this machine and select decrypt once it's uploaded to get your password (should take at least 5 minutes for the option before it allows you to upload your key). Once decrypted, copy the password and paste it into your RDP client. 
 
-**Downloading RDP**
+## **Downloading RDP**
 
 ![Downloading RDP](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Downloading_RDP.gif)
 
 Once inside the Window's machine, search for "Server Management" on the search bar at the bottom right and go to "local server" and select off for all settings by selecting "IE Enhanced Security Configuration". After doing this, now we want to open our web browser (Internet Explorer, Google Chrome, etc) on our Windows Machine. Minimize the Window's machine page and go back to your EC2 page. Go to your load balancers and select the load balancer you had created. There will be a URL that you can copy and paste into your web browser inside the Windows machine.  
 
-**Disabling Internet Explorer Security Configurations**
+## **Disabling Internet Explorer Security Configurations**
 
 ![Disabling Sec Configs](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Disabling_Security_config.gif)
 
-**Getting the Load Balancer DNS Name for our DVWA**
+## **Getting the Load Balancer DNS Name for our DVWA**
 
 ![Getting into DVWA](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Load_Balancer_DNSName.PNG)
 
 If you see DVWA appear on the web browser, then you're good to go! If not there may be a few issues that may have occurred. I have not ran into many issues myself but please refer to the **Possible Mishaps** section. I will point out crucial areas to check when setting up your server and what to look out for. 
 
-**How DVWA Looks Like**
+## **How DVWA Looks Like**
 
 ![DVWA Site](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/DVWA_Site.PNG)
 
 
 After the DVWA is setup, now we want to test out our ELK server. To do this, simply copy the IPv4 address of your ELK machine and paste it into the webbrowser of your Windows machine, and follow it up with the port number 5601. This should show the Kibana management page. The url should follow the same format: **<IPv4>:5601**. 
 
-**How ELK Looks Like**
+## **How ELK Looks Like**
 
 ![ELK Site](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Kibana_Site.PNG)
 
@@ -380,7 +380,7 @@ If your ELK is successful, then feel free to hop back up to the top and explore 
 -----
 
 # Possible Mishaps
-### 502 Bad Gateway
+## 502 Bad Gateway
 1. Assuming that you had deleted your NAT and Elastic IP, be sure to reinstall those into your VPC
 1a. Also be sure to reconnect Private route table to the NAT gateway
 2. Run all amazon instances (jumpbox, elk, dvwa, windows, and ansible in jumpbox)
@@ -391,7 +391,7 @@ If your ELK is successful, then feel free to hop back up to the top and explore 
 6. Modify .yml files to match current network (especially the filebeat and metricbeat)
 7. Rerun ansible-playbook on all .yml files
 
-### DVWA Not Appearing on Web Browser
+## DVWA Not Appearing on Web Browser
 Be sure to retrace your steps. The following items are necessary to ensure that the DVWA application can run:
 - Forgot to use the **sudo docker run -ti cyberxsecurity/ansible** command
     - NOTE: If the process is running and you cannot exit the machine without having to end the process, then just open another terminal to connect from. 
@@ -401,7 +401,7 @@ Be sure to retrace your steps. The following items are necessary to ensure that 
 - May have not configured your daemon.json on the Ubuntu instance properly
 - Something may have failed in the Ansible machine when downloading, be sure to rerun the ansible-playbook command or modify the ansible_config file to ensure that its configured properly.
 
-### ELK Not Appearing on Web Browser
+## ELK Not Appearing on Web Browser
 Be sure to retrace your steps. The following items are necessary to ensure that the ELK application can run:
 - Forgot to use the **sudo docker run -p 5601:5601 -p 9200:9200 -p 9300:9300 -p 9600:9600 -p 5044:5044 sebp/elk** command
     - NOTE: If the process is running and you cannot exit the machine without having to end the process, then just open another terminal to connect from. 
