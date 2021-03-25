@@ -73,7 +73,7 @@ In this industry where understanding and monitoring network activity is essentia
 
 On filebeat.yml, simply search for the following via Crtl+F on the file: "output.elasticsearch" and "setup.kibana". Near them will be an IPv4 address next to "host(s)" that you need to replace with your own IPv4 address (the address of the ELK server). 
 
-On filebeat-playbook.yml, you need to make sure that your ELK stack is already running. You must modiy the url next to "sudo curl" and "sudo dpkg" to match the urls shown on Kibana. To get to the page that shows this, go to either Logstash Logs or Elasticsearch Logs under the tutorials page. You can also add the following query to your URL to get to this tutorial page: '/app/kibana#/home/tutorial_directory/'.
+On filebeat-playbook.yml, you need to make sure that your ELK stack is already running. You must modiy the url next to "sudo curl" and "sudo dpkg" to match the urls shown on Kibana. To get to the page that shows this, go to either Logstash Logs or Elasticsearch Logs under the tutorials page. You can also add the following query to your URL to get to this tutorial page: 'bash/app/kibana#/home/tutorial_directory/'.
 
 ![Locating Filebeat](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Locating_Filebeat_URL.gif)
 
