@@ -290,15 +290,31 @@ sudo docker run -p 5601:5601 -p 9200:9200 -p 9300:9300 -p 9600:9600 -p 5044:5044
 # Testing our Servers
 This is where our Windows machine comes in. Using the Window's machine gives us a web browser to allow us to access the DVWA and ELK stack browser's in our network. Before doing this, make sure your servers are running, then log on to your remote Window's machine if you haven't. If you're currently unsure how to get to this point, select your Window's instance on the EC2 Instances page and select Connect. From here, you must download the RDP client to connect remotely. There will also be a "Get Password" box there. To do get your password, you need to upload the key you assigned to this machine and select decrypt once it's uploaded to get your password (should take at least 5 minutes for the option before it allows you to upload your key). Once decrypted, copy the password and paste it into your RDP client. 
 
+**Downloading RDP**
 
+![Downloading RDP](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Downloading_RDP.gif)
 
 Once inside the Window's machine, search for Server Management on the search bar at the bottom right and go to local server and turn off ......... After doing this, now we want to open our web browser (Internet Explorer, Google Chrome, etc) on our Windows Machine. Minimize the Window's machine page and go abck to your EC2 page. Go to your load balancers and select the load balancer you had created. There will be a URL that you can copy and paste into your web browser inside the Windows machine.  
 
+**Disabling Internet Explorer Security Configurations**
+
+![Disabling Sec Configs](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Disabling_Security_config.gif)
+
 If you see DVWA appear on the web browser, then you're good to go! If not there may be a few issues that may have occurred. I have not ran into many issues myself but please refer to the **Possible Mishaps** section. I will point out crucial areas to check when setting up your server and what to look out for. 
 
-After the DVWA is setup, now we want to test out our ELK server. To do this, simply copy the IPv4 address of your ELK machine and paste it into the webbrowser of your Windows machine, and follow it up with the port number 5601. The url should follow the same format: **<IPv4>:5601**. 
-    
-If you see ELK appear, then you're good to go! If not, then refer to the **Possible Mishaps** section once more to see the potential issues once more.
+**How DVWA Looks Like**
+
+![DVWA Site](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/DVWA_Site.PNG)
+
+
+After the DVWA is setup, now we want to test out our ELK server. To do this, simply copy the IPv4 address of your ELK machine and paste it into the webbrowser of your Windows machine, and follow it up with the port number 5601. This should show the Kibana management page. The url should follow the same format: **<IPv4>:5601**. 
+
+**How ELK Looks Like**
+
+![ELK Site](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Kibana_Site.PNG)
+
+
+If you see Kibana page appear, then you're good to go! If not, then refer to the **Possible Mishaps** section once more to see the potential issues once more.
 
 If your ELK is successful, then feel free to hop back up to the top and explore setting up filebeat and metricbeat on our ELK server. These will be viewed via Kibana.
 
