@@ -26,7 +26,7 @@ We also have a load balancer, which is a security measure for being able to dist
 
 
 
-| Operating System 	|       Name      	|    Subnet    	| Private/Public 	| Security Group 	|   Function  	|
+| Operating System 	|       Name      	|    Subnet    	| Access Policy 	| Security Group 	|   Function  	|
 |:----------------:	|:---------------:	|:------------:	|:--------------:	|:--------------:	|:-----------:	|
 |      Ubuntu      	|    ELK Server   	| 10.10.2.x/24 	|     Private    	|  ELKServer-SG  	|    Server   	|
 |      Ubuntu      	|  DVWA 1 Server  	| 10.10.2.x/24 	|     Private    	|  WebServer-SG  	|    Server   	|
@@ -42,6 +42,24 @@ As industries move forward and into the cloud, the demand for cloud practicioner
 
 -----
 
+# Navigating the Repository
+This document contains the following details:
+- Understanding the Repository
+- Creating our Cloudstack
+- Setting Up our Amazon Instances
+    - Ansible/Jumpbox (Amazon Linux 2)
+    - DVWA + ELK Servers (Ubuntu Servers)
+    - Windows Host Application (Windows 2019 Server)
+- Creating the Load Balancer
+- Setting Up Instances for Deployment
+    - Connecting to our Instances
+    - 
+- Running Our Servers
+- Testing Our Servers
+- Possible Mishaps (Troubleshooting)
+
+-----
+
 # Understanding the Repository
 This repository is for helping and practicing setting up a basic cloud network on AWS to host ELK and DVWA servers. Other things to setup will be MetricBeat and FileBeat to be used on our ELK server. The primary files to be used are daemon.json and the files located in the **"./Configs+Playbooks"** folder. You can follow the diagram above to get a visual understanding of how the network will look like in the end. 
 
@@ -54,7 +72,7 @@ The files in the Configs+Playbooks folder are:
 - metricbeat-playbook.yml
 - metricbeat.yml
 
-You will notice that we have "Beats" files and wonder how they are included in our ELK stack. ELK had included beats such as filebeat and metricbeat (there are plenty more like packetbeat, auditbeat, winlogbeat, etc. Refer to their page for more!) to act as an extension for log handling. As for specifically what they are, beats are essentially tools that help facilitate what kind of data you want to send to Elasticsearch. For our case, we want to use Filebeat and Metricbeat. Filebeat is a type of framework that reads files from our system (e.g. system and application log files) and centralizes them in an efficient manner, allowing us to be able to access these files and view them. Metricbeat on the otherhand is more useful for collecting metrics on our servers and systems and displaying that.
+You will notice that we have "Beats" files and wonder how they are included in our ELK stack. ELK had included beats such as filebeat and metricbeat (there are plenty more like packetbeat, auditbeat, winlogbeat, etc. Refer to their page for more!) to act as an extension for log handling. As for specifically what they are, beats are essentially tools that help facilitate what kind of data you want to send to Elasticsearch. For our case, we want to use Filebeat and Metricbeat. Filebeat is a type of framework that reads files from our system (e.g. system and application log files) and centralizes them in an efficient manner, allowing us to be able to access these files and view them. Metricbeat on the otherhand is more useful for collecting metrics and statistics on our servers and systems. Both Filebeat and Metricbeat pipe this data to Elasticsearch and Logstash, allowing us to view these via Kibana.
 
 **"Basic_Network_Cloud_Formation.yaml"** is used to automatically deploy our network into AWS. It's recommended to play around with network setup yourself, but it's not explained here. If you're familiar with reading .yaml files, then it's strongly recommended to read through it and understand how each device interconnects with one another. If not, then you can refer to the network diagram on how it actually looks while ignorning the machine instances.
 
@@ -187,6 +205,9 @@ On the EC2 page, look for load balancers and once found, select create load bala
 -----
 
 # Setting up our Instances for Deployment
+
+**Connecting to our Instances**
+
 We want to connect to our instances now. Go back to the instances page and select "Connect" for our Jumpbox and copy the ssh command.
 - Open a Gitbash/Command Prompt terminal and change directories into the directory where your key(s) are/is stored.
 - Paste the ssh command and hit enter. The command should fit in the outline of the following:
@@ -195,11 +216,16 @@ ssh -i <key> <user>@<destination>
 ```
 ![Connecting to Jumpbox](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Connecting_to_Jumpbox.gif)
 
+**Transfering our Files**
+
 - We want to transfer all our important configuration + key files (key files meaning keys) before moving on. To do that, it's recommended to open at least 1 more terminal (Gitbash or Command Prompt). The following command will allow you to transfer 1 or more files:
 ```bash
 scp -i <key> <file name(s)> <user>@<destination>:/path/to/home/directory
 Ex: scp -i Virginia.pem Virginia.pem ansible_config.yml thisuser@ec2.amazon.someinstance:/home/ec2-user
 ```
+
+**Setting Up our Environments**
+
 - ssh into each of your private Ubuntu instances using your keys and their private IPv4 addresses and update/upgrade them using the following commands:
 ```bash
 sudo apt-get update
