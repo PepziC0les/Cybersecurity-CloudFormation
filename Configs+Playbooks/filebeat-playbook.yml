@@ -5,11 +5,11 @@
   tasks:
     # Use command module
   - name: Download filebeat .deb file
-    command: sudo curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.11.1-amd64.deb
+    command: sudo curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.11.1-amd64.deb #Change this URL to yours
 
     # Use command module
   - name: Install filebeat .deb
-    command: sudo dpkg -i filebeat-7.11.1-amd64.deb
+    command: sudo dpkg -i filebeat-7.11.1-amd64.deb #Change file to match the necessary package to download (should match the end of the URL)
 
     # Use copy module
   - name: Drop in filebeat.yml
