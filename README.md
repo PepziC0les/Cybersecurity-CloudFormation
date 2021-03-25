@@ -200,7 +200,7 @@ Search for EC2 and select "Instances", and then create the following instances b
 # Creating the Load Balancer
 On the EC2 page, look for load balancers and once found, select create load balancer.
 1. Select "Create" for the "Application Load Balancer"
-2. Give our load balancer a meaningful name and set to interal, 
+2. Give our load balancer a meaningful name and set to interal. 
 3. Select VPC1 so that we have access to our availability zones (should be 2 that appears) and select them.
 - Make sure that the availability zones are set to Private1 and Private2 (the location of our DVWA servers)
 4. Select next until we reach configure security groups
@@ -209,7 +209,7 @@ On the EC2 page, look for load balancers and once found, select create load bala
 - Target group should be new target group
 - Set name to be something meaningful
 6. Select next and now look for our DVWA servers under "Name".
-- Select tthe checkboxes to the left for our DVWAs and select "add to registered"
+- Select the checkboxes to the left for our DVWAs and select "add to registered"
 - Note: If you already have a target group set for our DVWAs, skip step 6.
 7. Select next until you see "Create" and then select create.
 
@@ -283,7 +283,7 @@ sudo docker ps
 ![Checking Ansible Running](https://github.com/PepziC0les/Cybersecurity-CloudFormation/blob/main/Images/Checking_Ansilbe_if_Running.PNG)
 
 - Copy the value underneath process ID by highlighting it and keep that saved. If you had mistakingly exited or stopped the Ansible process, you can either reuse the **"sudo docker run -ti cyberxsecurity/ansible bash"** again if you did not see a process ID, or run **"sudo docker attach <process ID>"** to reenter the process.
-- We want to use the process ID to transfer our files (keys + configuration files) to our Ansible process. We can only trasnfer files 1 at a time using the following command:
+- We want to use the process ID to transfer our files (keys + configuration files) to our Ansible process. We can only transfer files 1 at a time using the following command:
 ```bash
 sudo docker cp <file> <process ID>:/root
 Ex: sudo docker cp Key1.pem ad314a9d:/root
@@ -392,8 +392,22 @@ If your ELK is successful, then feel free to hop back up to the top and explore 
 7. Rerun ansible-playbook on all .yml files
 
 ### DVWA Not Appearing on Web Browser
-
+Be sure to retrace your steps. The following items are necessary to ensure that the DVWA application can run:
+- Forgot to use the **sudo docker run -ti cyberxsecurity/ansible** command
+    - NOTE: If the process is running and you cannot exit the machine without having to end the process, then just open another terminal to connect from. 
+- Is HTTP port open in the security group
+- The Load Balancer is targeting the DVWA instances (check your target group)
+- Possibly forgot to set Public1 subnet to "Modify auto-assign IP settings" option to be enabled
+- May have not configured your daemon.json on the Ubuntu instance properly
+- Something may have failed in the Ansible machine when downloading, be sure to rerun the ansible-playbook command or modify the ansible_config file to ensure that its configured properly.
 
 ### ELK Not Appearing on Web Browser
+Be sure to retrace your steps. The following items are necessary to ensure that the ELK application can run:
+- Forgot to use the **sudo docker run -p 5601:5601 -p 9200:9200 -p 9300:9300 -p 9600:9600 -p 5044:5044 sebp/elk** command
+    - NOTE: If the process is running and you cannot exit the machine without having to end the process, then just open another terminal to connect from. 
+- Is HTTP, 5601, 9200, 9300, 9600, or 5044 port is open in the security group
+- Possibly forgot to set Public1 subnet to "Modify auto-assign IP settings" option to be enabled
+- May have not configured your daemon.json on the Ubuntu instance properly
+- Something may have failed in the Ansible machine when downloading, be sure to rerun the ansible-playbook command or modify the install-elk file to ensure that its configured properly.
 
 -----
