@@ -44,6 +44,7 @@ As industries move forward and into the cloud, the demand for cloud practicioner
 
 # Navigating the Repository
 This document contains the following details:
+- [1]:https://github.com/PepziC0les/Cybersecurity-CloudFormation#understanding-the-repository/  "Understanding the Repository"
 - Understanding the Repository
     - What To Modify and What Not To
 - Creating our Cloudstack
