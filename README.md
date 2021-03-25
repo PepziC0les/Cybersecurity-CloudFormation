@@ -57,7 +57,7 @@ The files in the Configs+Playbooks folder are:
 
 **NOTE:** If you're not familiar with AWS, then it's strongly recommended to setup an account on there now and explore the site yourself for now. Jumping into this without prior knowledge may lead to more confusion rather than helping oneself. This is especially the case when rebooting our network. More on that at the bottom of this README.
 
-**"ansible-playbook.yml"** is what we use in our Ansible process to automatically setup our targeted Ubuntu machines to become DVWA servers. Everything in ansible-playbook.yml should be fine to leave as it is (in other word's no modifications should be needed. Change otherwise if it does not suit your needs). 
+**"ansible_config.yml"** is what we use in our Ansible process to automatically setup our targeted Ubuntu machines to become DVWA servers. Everything in ansible-playbook.yml should be fine to leave as it is (in other word's no modifications should be needed. Change otherwise if it does not suit your needs). 
 
 **NOTE:** If you're not familiar with DVWA, then look here for a simplified explanation. Otherwise skip to the next part (**"install-elk.yml"**). DVWA is the "Damn Vulnerable Web Application", a web penetration practice site for penetration testers (similar to bWAPP and HackThisSite.org). By it's name, it should be obvious that it is very vulnerable, thus its a great way to learn and practice with to gain a better understanding of web vulnerabilities. It's useful to have this setup on our network so that we can monitor and analyze what's going on. Here we are learning how to set it up on our own machines (the Ubuntu cloud instance, not your personal machine).
 
