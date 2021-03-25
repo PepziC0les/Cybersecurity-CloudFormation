@@ -45,6 +45,7 @@ As industries move forward and into the cloud, the demand for cloud practicioner
 # Navigating the Repository
 This document contains the following details:
 - Understanding the Repository
+    - What To Modify and What Not To
 - Creating our Cloudstack
 - Setting Up our Amazon Instances
     - Ansible/Jumpbox (Amazon Linux 2)
@@ -83,6 +84,8 @@ The files in the Configs+Playbooks folder are:
 - metricbeat.yml
 
 You will notice that we have "Beats" files and wonder how they are included in our ELK stack. ELK had included beats such as filebeat and metricbeat (there are plenty more like packetbeat, auditbeat, winlogbeat, etc. Refer to their page for more!) to act as an extension for log handling. As for specifically what they are, beats are essentially tools that help facilitate what kind of data you want to send to Elasticsearch. For our case, we want to use Filebeat and Metricbeat. Filebeat is a type of framework that reads files from our system (e.g. system and application log files) and centralizes them in an efficient manner, allowing us to be able to access these files and view them. Metricbeat on the otherhand is more useful for collecting metrics and statistics on our servers and systems. Both Filebeat and Metricbeat pipe this data to Elasticsearch and Logstash, allowing us to view these via Kibana.
+
+**What To Modify and What Not To**
 
 **"Basic_Network_Cloud_Formation.yaml"** is used to automatically deploy our network into AWS. It's recommended to play around with network setup yourself, but it's not explained here. If you're familiar with reading .yaml files, then it's strongly recommended to read through it and understand how each device interconnects with one another. If not, then you can refer to the network diagram on how it actually looks while ignorning the machine instances.
 
