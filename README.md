@@ -20,9 +20,10 @@ The CloudFormation built here demonstrates creating a basic network and automati
 
 Shown above is a diagram depicting how the network is configured where we have our instances that we can connect to over the Internet in the "Public1" subnet, and our instances that we don't want accessed in our "Private1" subnet (Our ELK server and DVWA server). 
 
-Our subnets are also shown to be encapsulated in the diagram by the Availbility Zone used to host our virtual network. All connections are faciliated via the Internet Gateway, which is found on VPC1 and is connected to our "Public" subnets.
+Our subnets are also shown to be encapsulated in the diagram by the Availbility Zone used to host our virtual network. All connections are faciliated via the Internet Gateway, which is found on VPC1 and is connected to our "Public" subnets, meaning that these are the only machines we want to be able to directly access.
 
-### Access Policies
+We also have a load balancer, which is a security measure for being able to distribute traffic between multiple subnets. In our case, we wanted to distribute the load between subnets Private1 and Private2. Distributing load allows us to mitigate DDoS attacks where we can connect to one webserver if the other is down.
+
 
 
 | Operating System 	|       Name      	|    Subnet    	| Private/Public 	| Security Group 	|   Function  	|
@@ -52,6 +53,8 @@ The files in the Configs+Playbooks folder are:
 - filebeat.yml
 - metricbeat-playbook.yml
 - metricbeat.yml
+
+You will notice that we have "Beats" files and wonder how they are included in our ELK stack. ELK had included beats such as filebeat and metricbeat (there are plenty more like packetbeat, auditbeat, winlogbeat, etc. Refer to their page for more!) to act as an extension for log handling. As for specifically what they are, beats are essentially tools that help facilitate what kind of data you want to send to Elasticsearch. For our case, we want to use Filebeat and Metricbeat. Filebeat is a type of framework that reads files from our system (e.g. system and application log files) and centralizes them in an efficient manner, allowing us to be able to access these files and view them. Metricbeat on the otherhand is more useful for collecting metrics on our servers and systems and displaying that.
 
 **"Basic_Network_Cloud_Formation.yaml"** is used to automatically deploy our network into AWS. It's recommended to play around with network setup yourself, but it's not explained here. If you're familiar with reading .yaml files, then it's strongly recommended to read through it and understand how each device interconnects with one another. If not, then you can refer to the network diagram on how it actually looks while ignorning the machine instances.
 
